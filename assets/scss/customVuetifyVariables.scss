@@ -1,0 +1,85 @@
+// @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+// $body-font-family: "Open Sans", sans-serif !default;
+// .v-application {
+//   font-family: $body-font-family;
+// }
+
+// $new-colors: (
+//   "app-bar": map-get($red, "lighten-4") !important,
+//   "background": map-get($red, "lighten-4") !important,
+//   "cards": map-get($red, "lighten-4") !important,
+//   "bg-color": map-get($red, "lighten-4") !important,
+//   "fg-color": map-get($red, "lighten-4") !important,
+//   "text-color": map-get($red, "lighten-4") !important,
+//   "buttons": (
+//     "disabled": map-get($red, "lighten-4") !important,
+//     "focused": map-get($red, "lighten-4") !important,
+//     "focused-alt": map-get($red, "lighten-4") !important,
+//     "pressed": map-get($red, "lighten-4") !important
+//   )
+// );
+// $material-light: map-merge($material-light, $new-colors);
+// $material-dark: map-merge($material-dark, $new-colors);
+
+// $material-light: map-merge(
+//   $material-light,
+//   (
+//     "background":
+//       var(--v-background-base, map-get($material-light, "background"))
+//       !important,
+//     "app-bar": var(--v-bgPrimary-base, map-get($material-light, "bgPrimary"))
+//       !important,
+//     "cards": var(--v-bgPrimary-base, map-get($material-light, "bgPrimary"))
+//       !important,
+//     "icons": (
+//       "active":
+//         var(--v-iconPrimary-base, map-get($material-light, "iconPrimary"))
+//         !important
+//     ),
+//     "text": (
+//       "primary":
+//         var(--v-textPrimary-base, map-get($material-light, "textPrimary"))
+//         !important,
+//       "secondary":
+//         var(--v-textSecondary-base, map-get($material-light, "textSecondary"))
+//         !important
+//     ),
+//     "text-fields": (
+//       "filled": var(--v-primary-base, map-get($material-light, "primary"))
+//         !important
+//     ),
+//     "navigation-drawer":
+//       var(--v-background-base, map-get($material-light, "background"))
+//       !important
+//   )
+// );
+// $material-dark: map-merge(
+//   $material-dark,
+//   (
+//     "background":
+//       var(--v-background-base, map-get($material-dark, "background")) !important,
+//     "app-bar": var(--v-bgPrimary-base, map-get($material-dark, "bgPrimary"))
+//       !important,
+//     "cards": var(--v-bgPrimary-base, map-get($material-dark, "bgPrimary"))
+//       !important,
+//     "icons": (
+//       "active":
+//         var(--v-iconPrimary-base, map-get($material-dark, "iconPrimary"))
+//         !important
+//     ),
+//     "text": (
+//       "primary":
+//         var(--v-textPrimary-base, map-get($material-dark, "textPrimary"))
+//         !important,
+//       "secondary":
+//         var(--v-textSecondary-base, map-get($material-dark, "textSecondary"))
+//         !important
+//     ),
+//     "text-fields": (
+//       "filled": var(--v-primary-base, map-get($material-dark, "primary"))
+//         !important
+//     ),
+//     "navigation-drawer":
+//       var(--v-background-base, map-get($material-dark, "background")) !important
+//   )
+// );
