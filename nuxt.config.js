@@ -14,7 +14,13 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [
+      {
+        rel: "icon",
+        type: "image/x-icon",
+        href: "/images/favicon/favicon.webp"
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -48,7 +54,6 @@ export default {
           // iconPrimary: "#888",
           // textPrimary: "#b4bdca",
           // textSecondary: "#6d7d99",
-
           // primary: "#1976D2",
           // secondary: "#424242",
           // accent: "#82B1FF",
@@ -63,7 +68,6 @@ export default {
           // iconPrimary: "#888",
           // textPrimary: "#212529",
           // textSecondary: "#60686f",
-
           // primary: "#1976D2",
           // secondary: "#424242",
           // accent: "#82B1FF",
