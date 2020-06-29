@@ -2,19 +2,22 @@
   <div>
     <BannerCarousel></BannerCarousel>
     <AboutOrder></AboutOrder>
+    <MedicineSlider></MedicineSlider>
   </div>
 </template>
 
 <script>
 import BannerCarousel from "@/components/fontend/BannerCarousel";
 import AboutOrder from "@/components/fontend/AboutOrder";
+import MedicineSlider from "@/components/fontend/MedicineSlider";
 
 export default {
   name: "Home",
   components: {
     BannerCarousel,
-    AboutOrder
-  },
+    AboutOrder,
+    MedicineSlider
+  }
 };
 </script>
 

@@ -18,7 +18,7 @@
 
               <v-col cols="12">
                 <v-card flat class="d-flex justify-center">
-                  <v-card-title>৳ 200 Delivery Charge, Free Delivery for First Orders!</v-card-title>
+                  <v-card-title>200 TK Delivery Charge, Free Delivery for First Orders!</v-card-title>
                 </v-card>
               </v-col>
               <v-col cols="4" v-for="item in orderService" :key="item.id">
