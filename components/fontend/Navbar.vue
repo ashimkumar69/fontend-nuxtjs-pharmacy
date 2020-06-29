@@ -13,7 +13,7 @@
           <v-icon small>fas fa-prescription-bottle-alt</v-icon>
           <span class="ml-2 text-capitalize">All Medicine</span>
         </v-btn>
-        <v-btn text class="mr-2">
+        <v-btn text class="mr-2" :to="{name:'blogs'}">
           <v-icon small>fas fa-blog</v-icon>
           <span class="ml-2 text-capitalize">Blog</span>
         </v-btn>

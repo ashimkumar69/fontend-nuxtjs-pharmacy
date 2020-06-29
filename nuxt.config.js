@@ -36,7 +36,7 @@ export default {
   plugins: [
     { src: "~/plugins/vee-validate.js", mode: "client" },
     { src: "@/plugins/vue-slick-carousel.js" },
-    { src: "~/plugins/wordCountFilter.js" }
+    { src: "~/plugins/wordCountFilter.js" },
   ],
   /*
    ** Nuxt.js dev-modules
