@@ -2,17 +2,37 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-toolbar flat>
-          <v-icon class="mr-2">fas fa-images</v-icon>
-          <v-toolbar-title>Projects</v-toolbar-title>
+        <v-sheet color="transparent" class="d-flex py-3">
+          <v-list color="transparent" dark>
+            <v-list-item class="pl-0">
+              <v-list-item-icon class="mr-0">
+                <v-icon small color="light-blue lighten-2">fas fa-prescription-bottle-alt</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title class="text--primary">All Medicine</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
           <v-spacer></v-spacer>
-
-          <v-col cols="3">
+          <v-col cols="4">
+            <v-text-field
+              color="light-blue lighten-2"
+              v-model="form.message"
+              append-icon="mdi-magnify"
+              outlined
+              dense
+              clear-icon="mdi-close-circle"
+              clearable
+              label="Search"
+              type="text"
+              @click:append="searchIt"
+              @click:clear="clearSearch"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3" class="pr-0">
             <v-select
               color="light-blue lighten-2"
               v-model="select"
-              persistent-hint
-              :hint="`${select.tag}, ${select.name}`"
               :items="categories"
               item-text="name"
               item-value="tag"
@@ -22,7 +42,7 @@
               outlined
             ></v-select>
           </v-col>
-        </v-toolbar>
+        </v-sheet>
 
         <transition-group
           name="list-complete"
@@ -33,8 +53,9 @@
         >
           <v-card outlined v-for="item in filteredItems" :key="item.id" class="list-complete-item">
             <v-img height="200px" :src="item.image"></v-img>
+            <v-card-subtitle class="pb-0 text-capitalize">{{ item.category}}</v-card-subtitle>
             <v-card-title
-              class="font-weight-bold text-subtitle-2 pb-0"
+              class="font-weight-bold text-subtitle-2 pb-0 pt-0"
             >{{ item.name | str_limit(34) }}</v-card-title>
             <v-card-title
               v-if="item.oldMrp"
@@ -66,6 +87,9 @@
               <v-card-text>
                 <v-simple-table>
                   <tbody v-if="product">
+                    <tr>
+                      <td>Category: {{ product.category }}</td>
+                    </tr>
                     <tr>
                       <td>Name: {{ product.name }}</td>
                     </tr>
@@ -104,6 +128,11 @@
           </v-dialog>
         </div>
       </v-col>
+      <v-col cols="12">
+        <div class="text-center">
+          <v-pagination dark color="light-blue lighten-2" v-model="page" :length="6"></v-pagination>
+        </div>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -113,9 +142,11 @@ export default {
   name: "Products",
   data() {
     return {
+      page: 1,
       filterProjects: [
         {
           id: 1,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder Chu Chu Wet Wipes Cylinder",
           // oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -129,6 +160,7 @@ export default {
         },
         {
           id: 2,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder (Chu Chu)",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -142,6 +174,7 @@ export default {
         },
         {
           id: 3,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -155,6 +188,7 @@ export default {
         },
         {
           id: 4,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -168,6 +202,7 @@ export default {
         },
         {
           id: 5,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -181,6 +216,7 @@ export default {
         },
         {
           id: 6,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -194,6 +230,7 @@ export default {
         },
         {
           id: 7,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -207,6 +244,7 @@ export default {
         },
         {
           id: 8,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -220,6 +258,7 @@ export default {
         },
         {
           id: 9,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -240,7 +279,10 @@ export default {
         { tag: "tag1", name: "HTML" },
         { tag: "tag2", name: "Nuxtjs" }
       ],
-      select: { tag: "all", name: "All" }
+      select: { tag: "all", name: "All" },
+      form: {
+        message: null
+      }
     };
   },
   computed: {
@@ -260,6 +302,10 @@ export default {
           this.product = product;
         }
       });
+    },
+    searchIt() {},
+    clearSearch() {
+      this.form.message = "";
     }
   },
   watch: {

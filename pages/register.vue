@@ -12,7 +12,7 @@
                   <v-row no-gutters>
                     <v-col cols="12">
                       <client-only>
-                        <ValidationObserver ref="observer" v-slot="{ validate, reset }">
+                        <ValidationObserver ref="observer">
                           <v-form ref="form">
                             <ValidationProvider v-slot="{ errors }" name="name" rules="required">
                               <v-text-field

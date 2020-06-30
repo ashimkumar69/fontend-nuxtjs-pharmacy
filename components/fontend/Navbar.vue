@@ -2,7 +2,7 @@
   <div>
     <v-app-bar app>
       <v-container class="d-flex align-center">
-        <a href="/" class="d-flex align-center text-decoration-none">
+        <a @click.stop="goIndexPage" class="d-flex align-center text-decoration-none">
           <v-img alt="Logo" class="mr-2" src="/images/favicon/favicon.webp" width="30" />
           <span class="black--text">Pharmacy</span>
         </a>
@@ -32,7 +32,12 @@
 
 <script>
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  methods: {
+    goIndexPage() {
+      this.$router.push("/");
+    }
+  }
 };
 </script>
 

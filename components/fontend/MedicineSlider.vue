@@ -30,10 +30,11 @@
 
           <VueSlickCarousel v-bind="settings" ref="medicineCarousel">
             <div v-for="item in productMedicine" :key="item.id" class="width focuseOutlineNone">
-              <v-card>
+              <v-card outlined>
                 <v-img height="200px" :src="item.image"></v-img>
+                <v-card-subtitle class="pb-0 text-capitalize">{{ item.category}}</v-card-subtitle>
                 <v-card-title
-                  class="font-weight-bold text-subtitle-2 pb-0"
+                  class="font-weight-bold text-subtitle-2 pb-0 pt-0"
                 >{{ item.name | str_limit(34) }}</v-card-title>
                 <v-card-title
                   v-if="item.oldMrp"
@@ -68,6 +69,9 @@
                 <v-card-text>
                   <v-simple-table>
                     <tbody v-if="product">
+                      <tr>
+                        <td>Category: {{ product.category }}</td>
+                      </tr>
                       <tr>
                         <td>Name: {{ product.name }}</td>
                       </tr>
@@ -127,6 +131,7 @@ export default {
         autoplaySpeed: 2000,
         cssEase: "linear",
         pauseOnHover: true,
+        rows: 2,
 
         responsive: [
           {
@@ -158,6 +163,7 @@ export default {
       productMedicine: [
         {
           id: 1,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder Chu Chu Wet Wipes Cylinder",
           // oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -170,6 +176,7 @@ export default {
         },
         {
           id: 2,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder (Chu Chu)",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -182,6 +189,7 @@ export default {
         },
         {
           id: 3,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -194,6 +202,7 @@ export default {
         },
         {
           id: 4,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",
@@ -206,6 +215,72 @@ export default {
         },
         {
           id: 5,
+          category: "medicine",
+          name: "Chu Chu Wet Wipes Cylinder",
+          oldMrp: "60 TK (per pata)",
+          newMrp: "50 TK (per pata)",
+          image: "/images/product/medicine/1.webp",
+          Generic: "azithromycin",
+          Type: "Tablet",
+          Quantity: "12's pack",
+          PiecesPerPata: "5",
+          Dose: "500mg"
+        },
+        {
+          id: 6,
+          category: "medicine",
+          name: "Chu Chu Wet Wipes Cylinder",
+          oldMrp: "60 TK (per pata)",
+          newMrp: "50 TK (per pata)",
+          image: "/images/product/medicine/1.webp",
+          Generic: "azithromycin",
+          Type: "Tablet",
+          Quantity: "12's pack",
+          PiecesPerPata: "5",
+          Dose: "500mg"
+        },
+        {
+          id: 7,
+          category: "medicine",
+          name: "Chu Chu Wet Wipes Cylinder",
+          oldMrp: "60 TK (per pata)",
+          newMrp: "50 TK (per pata)",
+          image: "/images/product/medicine/1.webp",
+          Generic: "azithromycin",
+          Type: "Tablet",
+          Quantity: "12's pack",
+          PiecesPerPata: "5",
+          Dose: "500mg"
+        },
+        {
+          id: 8,
+          category: "medicine",
+          name: "Chu Chu Wet Wipes Cylinder",
+          oldMrp: "60 TK (per pata)",
+          newMrp: "50 TK (per pata)",
+          image: "/images/product/medicine/1.webp",
+          Generic: "azithromycin",
+          Type: "Tablet",
+          Quantity: "12's pack",
+          PiecesPerPata: "5",
+          Dose: "500mg"
+        },
+        {
+          id: 9,
+          category: "medicine",
+          name: "Chu Chu Wet Wipes Cylinder",
+          oldMrp: "60 TK (per pata)",
+          newMrp: "50 TK (per pata)",
+          image: "/images/product/medicine/1.webp",
+          Generic: "azithromycin",
+          Type: "Tablet",
+          Quantity: "12's pack",
+          PiecesPerPata: "5",
+          Dose: "500mg"
+        },
+        {
+          id: 10,
+          category: "medicine",
           name: "Chu Chu Wet Wipes Cylinder",
           oldMrp: "60 TK (per pata)",
           newMrp: "50 TK (per pata)",

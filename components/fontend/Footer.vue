@@ -16,10 +16,9 @@
                 </v-list-item>
               </v-list>
 
-              <v-card-text class="pl-0">
-                DD News is a premium magazine template based on Vuetify 2.
-                We bring you the best Premium Themes that perfect for news, magazine, personal blog, etc.
-              </v-card-text>
+              <v-card-text
+                class="pl-0 pt-0"
+              >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, cupiditate iste. Architecto ad, est saepe a eveniet eius ex. Minus eveniet aliquid culpa, ducimus id voluptate eaque aperiam quas facilis.</v-card-text>
               <v-card-title class="pl-0">Follow Us</v-card-title>
               <v-card-text class="pl-0">
                 <v-btn
@@ -38,7 +37,7 @@
           </v-col>
           <v-col cols="4">
             <v-card flat tile>
-              <v-card-title>Manualy Contact Us</v-card-title>
+              <v-card-title>Manually Contact Us</v-card-title>
               <v-list>
                 <v-list-item>
                   <v-list-item-icon class="mr-2">
@@ -89,13 +88,25 @@
                 <div
                   class="mb-2"
                 >Don’t miss to subscribe to our news feeds, kindly fill the form below</div>
-                <v-text-field
-                  color="light-blue lighten-2"
-                  label="Your Email Address"
-                  outlined
-                  clearable
-                ></v-text-field>
-                <v-btn block color="light-blue lighten-2" outlined>SUBSCRIBE</v-btn>
+                <client-only>
+                  <ValidationObserver ref="observer">
+                    <v-form ref="form">
+                      <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
+                        <v-text-field
+                          color="light-blue lighten-2"
+                          v-model="form.email"
+                          :error-messages="errors"
+                          label="Your Email Address"
+                          outlined
+                          clearable
+                          required
+                        ></v-text-field>
+                      </ValidationProvider>
+                    </v-form>
+                  </ValidationObserver>
+                </client-only>
+
+                <v-btn block color="light-blue lighten-2" outlined @click.stop="submit">SUBSCRIBE</v-btn>
               </v-card-text>
             </v-card>
           </v-col>
@@ -115,12 +126,24 @@
 
 <script>
 export default {
-  data: () => ({
-    icons: [
-      { id: 1, icon: "fab fa-facebook-f" },
-      { id: 2, icon: "mdi-twitter" },
-      { id: 3, icon: "mdi-youtube" }
-    ]
-  })
+  data() {
+    return {
+      icons: [
+        { id: 1, icon: "fab fa-facebook-f" },
+        { id: 2, icon: "mdi-twitter" },
+        { id: 3, icon: "mdi-youtube" }
+      ],
+      form: {
+        email: null
+      }
+    };
+  },
+  methods: {
+    submit() {
+      this.$refs.observer.validate();
+      this.$refs.observer.reset();
+      this.$refs.form.reset();
+    }
+  }
 };
 </script>
