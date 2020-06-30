@@ -3,24 +3,22 @@
     <v-footer padless>
       <v-container>
         <v-row>
-          <v-col cols="4">
-            <v-card flat tile>
+          <v-col cols="12" lg="4">
+            <v-card flat tile class="text-center text-lg-left">
               <v-list>
-                <v-list-item>
-                  <v-list-item-icon class="mr-2">
+                <v-list-item class="d-flex justify-center justify-lg-start">
+                  <v-list-item-icon>
                     <v-img src="/images/favicon/favicon.webp" width="30px"></v-img>
+                    <span class="ml-2 black--text">Pharmacy</span>
                   </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title>Pharmacy</v-list-item-title>
-                  </v-list-item-content>
                 </v-list-item>
               </v-list>
 
               <v-card-text
-                class="pl-0 pt-0"
+                class="px-0 pt-0"
               >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, cupiditate iste. Architecto ad, est saepe a eveniet eius ex. Minus eveniet aliquid culpa, ducimus id voluptate eaque aperiam quas facilis.</v-card-text>
-              <v-card-title class="pl-0">Follow Us</v-card-title>
-              <v-card-text class="pl-0">
+              <v-card-title class="px-0 d-flex justify-center justify-lg-start">Follow Us</v-card-title>
+              <v-card-text class="px-0">
                 <v-btn
                   v-for="icon in icons"
                   :key="icon.id"
@@ -35,10 +33,10 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="12" lg="4">
             <v-card flat tile>
-              <v-card-title>Manually Contact Us</v-card-title>
-              <v-list>
+              <v-card-title class="d-flex justify-center justify-lg-start">Manually Contact Us</v-card-title>
+              <v-list class="text-center text-lg-left">
                 <v-list-item>
                   <v-list-item-icon class="mr-2">
                     <v-icon color="light-blue lighten-2">mdi-phone</v-icon>
@@ -69,7 +67,7 @@
                     <v-icon color="light-blue lighten-2">fas fa-map-marker-alt</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-card-text class="pt-0 pl-0 text--secondary">
+                    <v-card-text class="pt-0 px-0 text--secondary">
                       #50 Road 9/A
                       (Next to Meena Bazaar)
                       Dhanmondi, Dhaka 1209
@@ -80,13 +78,13 @@
               </v-list>
             </v-card>
           </v-col>
-          <v-col cols="4">
+          <v-col cols="12" lg="4">
             <v-card flat tile>
-              <v-card-title>Newsletter</v-card-title>
+              <v-card-title class="d-flex justify-center justify-lg-start">Newsletter</v-card-title>
 
               <v-card-text>
                 <div
-                  class="mb-2"
+                  class="mb-2 text-center text-lg-left"
                 >Don’t miss to subscribe to our news feeds, kindly fill the form below</div>
                 <client-only>
                   <ValidationObserver ref="observer">
@@ -117,7 +115,8 @@
       <v-divider></v-divider>
 
       <v-card-text>
-        {{ new Date().getFullYear() }} —
+        Copyright &copy; {{ new Date().getFullYear() }} —
+        Powered by
         <strong>Pharmacy</strong>
       </v-card-text>
     </v-card>

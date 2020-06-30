@@ -5,8 +5,8 @@
         <v-col cols="12">
           <v-card>
             <v-row>
-              <v-col cols="3" v-for="item in howToOrder" :key="item.id">
-                <v-card flat class="text-center">
+              <v-col cols="12" sm="6" lg="3" v-for="item in howToOrder" :key="item.id">
+                <v-card flat>
                   <v-card-text>
                     <v-btn fab small color="light-blue lighten-2" dark>
                       <v-icon small>{{ item.icon }}</v-icon>
@@ -21,7 +21,7 @@
                   <v-card-title>200 TK Delivery Charge, Free Delivery for First Orders!</v-card-title>
                 </v-card>
               </v-col>
-              <v-col cols="4" v-for="item in orderService" :key="item.id">
+              <v-col cols="12" sm="6" lg="4" v-for="item in orderService" :key="item.id">
                 <v-card flat>
                   <v-card-text class="pb-0">
                     <v-btn fab small color="light-blue lighten-2" dark>

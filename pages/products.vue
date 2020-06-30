@@ -6,7 +6,7 @@
           <v-list color="transparent" dark>
             <v-list-item class="pl-0">
               <v-list-item-icon class="mr-0">
-                <v-icon small color="light-blue lighten-2">fas fa-prescription-bottle-alt</v-icon>
+                <v-icon small color="light-blue lighten-2">fas fa-file-medical</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
                 <v-list-item-title class="text--primary">All Medicine</v-list-item-title>
@@ -321,7 +321,7 @@ $sm-breakpoint: 600px;
 $md-breakpoint: 960px;
 
 @mixin xs {
-  @media only screen and (max-width: $sm-breakpoint - 0.02) {
+  @media only screen and (max-width: $sm-breakpoint - 1) {
     @content;
   }
 }
@@ -333,7 +333,7 @@ $md-breakpoint: 960px;
 }
 
 @mixin sm {
-  @media screen and (min-width: $sm-breakpoint) and (max-width: $md-breakpoint - 0.02) {
+  @media screen and (min-width: $sm-breakpoint) and (max-width: $md-breakpoint - 1) {
     @content;
   }
 }

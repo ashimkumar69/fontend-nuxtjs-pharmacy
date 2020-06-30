@@ -4,28 +4,56 @@
       <v-row>
         <v-col cols="12">
           <v-sheet color="transparent" class="d-flex py-3">
-            <v-icon small color="light-blue lighten-2" class="mr-2">fas fa-prescription-bottle-alt</v-icon>
+            <v-icon small color="light-blue lighten-2" class="mr-2">fas fa-file-medical</v-icon>
             <div class="font-weight-bold text-h6">Medicine</div>
 
             <v-spacer></v-spacer>
-            <v-btn
-              color="light-blue lighten-2"
-              outlined
-              @click="$refs.medicineCarousel.prev()"
-              class="mr-1"
-            >
-              <v-icon small>fas fa-chevron-left</v-icon>
-            </v-btn>
+            <v-sheet color="transparent" class="hidden-xs">
+              <v-btn
+                color="light-blue lighten-2"
+                outlined
+                @click="$refs.medicineCarousel.prev()"
+                class="mr-1"
+              >
+                <v-icon small>fas fa-chevron-left</v-icon>
+              </v-btn>
 
-            <v-btn
-              class="mr-1"
-              color="light-blue lighten-2"
-              outlined
-              @click="$refs.medicineCarousel.next()"
-            >
-              <v-icon small>fas fa-chevron-right</v-icon>
-            </v-btn>
-            <v-btn color="light-blue lighten-2" class="text-capitalize" outlined>See All</v-btn>
+              <v-btn
+                class="mr-1"
+                color="light-blue lighten-2"
+                outlined
+                @click="$refs.medicineCarousel.next()"
+              >
+                <v-icon small>fas fa-chevron-right</v-icon>
+              </v-btn>
+              <v-btn color="light-blue lighten-2" class="text-capitalize" outlined>See All</v-btn>
+            </v-sheet>
+            <v-sheet color="transparent" class="hidden-sm-and-up">
+              <v-btn
+                small
+                color="light-blue lighten-2"
+                outlined
+                @click="$refs.medicineCarousel.prev()"
+              >
+                <v-icon small>fas fa-chevron-left</v-icon>
+              </v-btn>
+
+              <v-btn
+                small
+                color="light-blue lighten-2"
+                outlined
+                @click="$refs.medicineCarousel.next()"
+              >
+                <v-icon small>fas fa-chevron-right</v-icon>
+              </v-btn>
+              <v-btn
+                small
+                color="light-blue lighten-2"
+                class="text-capitalize"
+                outlined
+                to="/products"
+              >See All</v-btn>
+            </v-sheet>
           </v-sheet>
 
           <VueSlickCarousel v-bind="settings" ref="medicineCarousel">
@@ -135,27 +163,30 @@ export default {
 
         responsive: [
           {
-            breakpoint: 1263.98,
+            breakpoint: 1263,
             settings: {
               slidesToShow: 3,
               slidesToScroll: 1,
-              infinite: true,
-              dots: true
+              dots: false,
+              arrows: false
             }
           },
           {
-            breakpoint: 959.98,
+            breakpoint: 959,
             settings: {
               slidesToShow: 2,
               slidesToScroll: 1,
-              initialSlide: 2
+              dots: false,
+              arrows: false
             }
           },
           {
-            breakpoint: 599.98,
+            breakpoint: 599,
             settings: {
               slidesToShow: 1,
-              slidesToScroll: 1
+              slidesToScroll: 1,
+              dots: false,
+              arrows: false
             }
           }
         ]
@@ -315,7 +346,7 @@ $sm-breakpoint: 600px;
 $md-breakpoint: 960px;
 
 @mixin xs {
-  @media only screen and (max-width: $sm-breakpoint - 0.02) {
+  @media only screen and (max-width: $sm-breakpoint - 1) {
     @content;
   }
 }
@@ -327,7 +358,7 @@ $md-breakpoint: 960px;
 }
 
 @mixin sm {
-  @media screen and (min-width: $sm-breakpoint) and (max-width: $md-breakpoint - 0.02) {
+  @media screen and (min-width: $sm-breakpoint) and (max-width: $md-breakpoint - 1) {
     @content;
   }
 }
