@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col cols="8" class="mx-auto">
+        <v-col cols="12" lg="8" class="mx-auto">
           <v-card>
             <v-img :src="blog.image" height="350px"></v-img>
             <v-card-subtitle class="pb-0">{{ blog.created }}</v-card-subtitle>

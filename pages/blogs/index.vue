@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col cols="6" v-for="item in blogs" :key="item.id">
+        <v-col cols="12" md="6" lg="6" v-for="item in blogs" :key="item.id">
           <v-card>
             <v-img :src="item.image" height="250px"></v-img>
             <v-card-subtitle class="pb-0">{{ item.created }}</v-card-subtitle>

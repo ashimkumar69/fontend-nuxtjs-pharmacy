@@ -3,7 +3,7 @@
     <div class="loginOverlay d-flex align-center">
       <v-container>
         <v-row class="d-flex justify-center">
-          <v-col cols="6">
+          <v-col cols="12" sm="10" md="8" lg="6">
             <v-card>
               <v-card-title>Send Email</v-card-title>
               <v-divider></v-divider>

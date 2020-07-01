@@ -2,46 +2,50 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <v-sheet color="transparent" class="d-flex py-3">
-          <v-list color="transparent" dark>
-            <v-list-item class="pl-0">
-              <v-list-item-icon class="mr-0">
-                <v-icon small color="light-blue lighten-2">fas fa-file-medical</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title class="text--primary">All Medicine</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-          <v-spacer></v-spacer>
-          <v-col cols="4">
-            <v-text-field
-              color="light-blue lighten-2"
-              v-model="form.message"
-              append-icon="mdi-magnify"
-              outlined
-              dense
-              clear-icon="mdi-close-circle"
-              clearable
-              label="Search"
-              type="text"
-              @click:append="searchIt"
-              @click:clear="clearSearch"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="3" class="pr-0">
-            <v-select
-              color="light-blue lighten-2"
-              v-model="select"
-              :items="categories"
-              item-text="name"
-              item-value="tag"
-              return-object
-              label="Mediciens"
-              dense
-              outlined
-            ></v-select>
-          </v-col>
+        <v-sheet color="transparent">
+          <v-row>
+            <v-col lg="3" class="py-0 py-lg-2">
+              <v-list color="transparent" dark>
+                <v-list-item class="pl-0">
+                  <v-list-item-icon class="mr-0">
+                    <v-icon small color="light-blue lighten-2">fas fa-file-medical</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title class="text--primary text-h6">All Medicine</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-col>
+
+            <v-col cols="12" lg="4" class="py-0 py-lg-2">
+              <v-select
+                color="light-blue lighten-2"
+                v-model="select"
+                :items="categories"
+                item-text="name"
+                item-value="tag"
+                return-object
+                label="Medicien Categories"
+                dense
+                outlined
+              ></v-select>
+            </v-col>
+            <v-col cols="12" lg="5" class="py-0 py-lg-2">
+              <v-text-field
+                color="light-blue lighten-2"
+                v-model="form.message"
+                append-icon="mdi-magnify"
+                outlined
+                dense
+                clear-icon="mdi-close-circle"
+                clearable
+                label="Search"
+                type="text"
+                @click:append="searchIt"
+                @click:clear="clearSearch"
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </v-sheet>
 
         <transition-group
@@ -319,6 +323,7 @@ export default {
 <style lang="scss" scoped>
 $sm-breakpoint: 600px;
 $md-breakpoint: 960px;
+$lg-breakpoint: 1264px;
 
 @mixin xs {
   @media only screen and (max-width: $sm-breakpoint - 1) {
@@ -345,12 +350,24 @@ $md-breakpoint: 960px;
 }
 
 @mixin md-up {
-  @media only screen and (min-width: $md-breakpoint) {
+  @media screen and (min-width: $md-breakpoint) and (max-width: $lg-breakpoint - 1) {
     @content;
   }
 }
 
 @include md-up {
+  .list-complete-item {
+    width: 24.7%;
+  }
+}
+
+@mixin lg-up {
+  @media only screen and (min-width: $lg-breakpoint) {
+    @content;
+  }
+}
+
+@include lg-up {
   .list-complete-item {
     width: 24.8%;
   }

@@ -15,7 +15,7 @@
               tabindex="0"
             ></iframe>
           </v-col>
-          <v-col cols="8">
+          <v-col cols="12" lg="8">
             <v-card>
               <v-card-title>Contauct Us</v-card-title>
               <v-divider></v-divider>

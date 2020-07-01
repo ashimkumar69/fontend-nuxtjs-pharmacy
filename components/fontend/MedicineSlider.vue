@@ -8,7 +8,7 @@
             <div class="font-weight-bold text-h6">Medicine</div>
 
             <v-spacer></v-spacer>
-            <v-sheet color="transparent" class="hidden-xs">
+            <v-sheet color="transparent" class="hidden-xs-only">
               <v-btn
                 color="light-blue lighten-2"
                 outlined
