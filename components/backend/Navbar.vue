@@ -81,6 +81,15 @@
                   <v-list-item-title v-text="item.name"></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+              <v-divider></v-divider>
+              <v-list-item dense @click.stop="logout">
+                <v-list-item-icon>
+                  <v-icon small>fas fa-sign-out-alt</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Logout</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
             </v-list-item-group>
           </v-list>
         </v-card>
@@ -116,7 +125,11 @@
               </v-list-item-content>
             </template>
 
-            <v-list-item v-for="subItem in item.children" :key="subItem.id" @click>
+            <v-list-item
+              v-for="subItem in item.children"
+              :key="subItem.id"
+              @click.stop="goPage(subItem.to)"
+            >
               <v-list-item-content>
                 <v-list-item-title v-text="subItem.name"></v-list-item-title>
               </v-list-item-content>
@@ -126,7 +139,7 @@
             </v-list-item>
           </v-list-group>
 
-          <v-list-item v-else :key="item.id" @click>
+          <v-list-item v-else :key="item.id" @click.stop="goPage(item.to)">
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
@@ -152,11 +165,10 @@ export default {
       drawer: true,
       adminNavs: [
         { id: 1, name: "Profile", icon: "fas fa-user" },
-        { id: 2, name: "Settings", icon: "fas fa-cog" },
-        { id: 3, name: "Logout", icon: "fas fa-sign-out-alt" }
+        { id: 2, name: "Settings", icon: "fas fa-cog" }
       ],
       adminDrawerNavs: [
-        { id: 1, name: "Dashboord", icon: "mdi-home-city" },
+        { id: 1, name: "Dashboord", icon: "mdi-home-city", to: "/admin" },
         {
           id: 2,
           name: "Users",
@@ -171,8 +183,18 @@ export default {
           name: "Categories",
           icon: "mdi-account-group-outline",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read" },
-            { id: 2, icon: "mdi-plus", name: "Create" },
+            {
+              id: 1,
+              icon: "fas fa-file",
+              name: "Read",
+              to: "/admin/categories"
+            },
+            {
+              id: 2,
+              icon: "mdi-plus",
+              name: "Create",
+              to: "/admin/categories/create"
+            },
             { id: 3, icon: "mdi-update", name: "Update" }
           ]
         },
@@ -209,6 +231,16 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    goPage(to) {
+      this.$router.push(`${to}`);
+    },
+    logout() {
+      this.$auth.logout("local").then(() => {
+        this.$toast.success("Successfully Logout");
+      });
+    }
   }
 };
 </script>

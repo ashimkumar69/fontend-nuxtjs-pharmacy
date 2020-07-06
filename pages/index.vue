@@ -13,6 +13,7 @@ import MedicineSlider from "@/components/fontend/MedicineSlider";
 
 export default {
   name: "Home",
+  auth: false,
   components: {
     BannerCarousel,
     AboutOrder,

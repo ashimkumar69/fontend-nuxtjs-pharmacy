@@ -21,7 +21,7 @@
                   <v-card-title>200 TK Delivery Charge, Free Delivery for First Orders!</v-card-title>
                 </v-card>
               </v-col>
-              <v-col cols="12" sm="6" lg="4" v-for="item in orderService" :key="item.id">
+              <v-col cols="12" sm="6" lg="4" v-for="item  in orderService" :key="item.name">
                 <v-card flat>
                   <v-card-text class="pb-0">
                     <v-btn fab small color="light-blue lighten-2" dark>

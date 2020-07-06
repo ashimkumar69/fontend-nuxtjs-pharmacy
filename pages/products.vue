@@ -144,6 +144,7 @@
 <script>
 export default {
   name: "Products",
+  auth: false,
   data() {
     return {
       page: 1,

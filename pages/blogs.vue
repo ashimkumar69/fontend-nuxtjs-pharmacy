@@ -6,7 +6,8 @@
 
 <script>
 export default {
-  name: "Blogs-Parent"
+  name: "Blogs-Parent",
+  auth: false,
 };
 </script>
 

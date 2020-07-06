@@ -2,38 +2,38 @@
   <div class="login">
     <div class="loginOverlay d-flex align-center">
       <v-container>
-        <v-row class="d-flex justify-center">
+        <v-row justify="center">
           <v-col cols="12" sm="10" md="8" lg="6">
             <v-card>
               <v-card-title>Send Email</v-card-title>
               <v-divider></v-divider>
               <v-card-text>
-                <v-container class="pa-0">
-                  <v-row no-gutters>
-                    <v-col cols="12">
-                      <client-only>
-                        <ValidationObserver ref="observer">
-                          <v-form ref="form">
-                            <ValidationProvider
-                              v-slot="{ errors }"
-                              name="email"
-                              rules="required|email"
-                            >
-                              <v-text-field
-                                color="light-blue lighten-2"
-                                prepend-icon="mdi-email"
-                                v-model="form.email"
-                                :error-messages="errors"
-                                label="E-mail"
-                                required
-                              ></v-text-field>
-                            </ValidationProvider>
-                          </v-form>
-                        </ValidationObserver>
-                      </client-only>
-                    </v-col>
-                  </v-row>
-                </v-container>
+                <client-only>
+                  <ValidationObserver ref="observer">
+                    <v-form ref="form">
+                      <ValidationProvider v-slot="{ errors }" name="email" rules="required|email">
+                        <v-text-field
+                          v-if="serverErrors.email"
+                          color="light-blue lighten-2"
+                          prepend-icon="mdi-email"
+                          v-model="form.email"
+                          :error-messages="serverErrors.email"
+                          label="E-mail"
+                          required
+                        ></v-text-field>
+                        <v-text-field
+                          v-else
+                          color="light-blue lighten-2"
+                          prepend-icon="mdi-email"
+                          v-model="form.email"
+                          :error-messages="errors"
+                          label="E-mail"
+                          required
+                        ></v-text-field>
+                      </ValidationProvider>
+                    </v-form>
+                  </ValidationObserver>
+                </client-only>
               </v-card-text>
               <v-divider></v-divider>
               <v-card-actions>
@@ -52,6 +52,8 @@
 <script>
 export default {
   name: "ResetPasswordEmail",
+  auth: "guest",
+  // middleware: "isGuest",
   data() {
     return {
       form: {
@@ -67,6 +69,7 @@ export default {
     clear() {
       this.$refs.form.reset();
       this.$refs.observer.reset();
+      this.$store.dispatch("serverValidationErrors/clearErrors");
     }
   }
 };

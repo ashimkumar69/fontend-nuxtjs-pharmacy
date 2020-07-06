@@ -36,7 +36,10 @@ export default {
   plugins: [
     { src: "~/plugins/vee-validate.js", mode: "client" },
     { src: "@/plugins/vue-slick-carousel.js" },
-    { src: "~/plugins/wordCountFilter.js" }
+    { src: "~/plugins/wordCountFilter.js" },
+    { src: "~/plugins/backend/mixins/getServerValidationErrors.js" },
+    // backend
+    { src: "~/plugins/backend/axios.js" }
   ],
   /*
    ** Nuxt.js dev-modules
@@ -89,14 +92,20 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     "@nuxtjs/axios",
+    "@nuxtjs/auth",
     // Doc: https://github.com/nuxt-community/dotenv-module
-    "@nuxtjs/dotenv"
+    "@nuxtjs/dotenv",
+    "@nuxtjs/toast"
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: process.env.BASE_URL,
+    credentials: true
+  },
+
   /*
    ** Build configuration
    */
@@ -105,5 +114,46 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  server: {
+    host: "localhost",
+    port: "8010"
+  },
+
+  auth: {
+    localStorage: false,
+    cookie: {
+      prefix: "auth.",
+
+      options: {
+        path: "/",
+        maxAge: 60 * 60
+      }
+    },
+    redirect: {
+      login: "/login",
+      logout: "/",
+      callback: "/login",
+      home: "/admin"
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/auth/login",
+            method: "post",
+            propertyName: "access_token"
+          },
+          user: { url: "/auth/user", method: "get", propertyName: "data" },
+          logout: { url: "/auth/logout", method: "post" }
+        },
+        tokenType: "bearer"
+      }
+    }
+  },
+
+  router: {
+    middleware: ["auth", "clearServerValidationErrors"]
   }
+  // end
 };

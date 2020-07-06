@@ -6,9 +6,7 @@
 
 <script>
 export default {
-  name: "Admin-Parent",
-  layout: "adminDefault",
-  middleware: "isEmailVerifyed"
+  name: "Categories-Parent"
 };
 </script>
 
