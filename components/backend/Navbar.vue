@@ -54,7 +54,7 @@
           </v-badge>
         </template>
 
-        <v-card>
+        <v-card width="200px">
           <v-card-title class="d-flex justify-center">{{ name }}</v-card-title>
 
           <v-divider></v-divider>
@@ -156,7 +156,7 @@ export default {
       drawer: true,
       adminNavs: [
         { id: 1, name: "Profile", icon: "fas fa-user", to: "/admin/profile" },
-        { id: 2, name: "Settings", icon: "fas fa-cog" }
+        { id: 2, name: "Settings", icon: "fas fa-cog", to: "/admin/setting" }
       ],
       adminDrawerNavs: [
         { id: 1, name: "Dashboord", icon: "mdi-home-city", to: "/admin" },

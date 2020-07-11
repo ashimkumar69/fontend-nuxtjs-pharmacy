@@ -19,7 +19,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-subtitle>{{ phone }}</v-list-item-subtitle>
+                  <v-list-item-title>{{ phone }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -28,7 +28,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
+                  <v-list-item-title>{{ email }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -37,7 +37,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-subtitle>{{ address }}</v-list-item-subtitle>
+                  <v-list-item-title>{{ address }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -48,6 +48,7 @@
                 <v-expansion-panel-content>
                   <v-form ref="form">
                     <v-file-input
+                      color="light-blue lighten-2"
                       class="mt-4"
                       type="file"
                       accept="image/*"
@@ -59,11 +60,24 @@
                       :error-messages="serverErrors.avatar"
                     ></v-file-input>
 
-                    <v-text-field v-model="form.name" label="Name" outlined dense></v-text-field>
-
-                    <v-text-field v-model="form.phone" label="Phone" outlined dense></v-text-field>
+                    <v-text-field
+                      color="light-blue lighten-2"
+                      v-model="form.name"
+                      label="Name"
+                      outlined
+                      dense
+                    ></v-text-field>
 
                     <v-text-field
+                      color="light-blue lighten-2"
+                      v-model="form.phone"
+                      label="Phone"
+                      outlined
+                      dense
+                    ></v-text-field>
+
+                    <v-text-field
+                      color="light-blue lighten-2"
                       v-model="form.email"
                       label="Email"
                       outlined
@@ -71,8 +85,15 @@
                       :error-messages="serverErrors.email"
                     ></v-text-field>
 
-                    <v-text-field v-model="form.address" label="Address" outlined dense></v-text-field>
                     <v-text-field
+                      color="light-blue lighten-2"
+                      v-model="form.address"
+                      label="Address"
+                      outlined
+                      dense
+                    ></v-text-field>
+                    <v-text-field
+                      color="light-blue lighten-2"
                       v-model="form.password"
                       :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                       :type="show1 ? 'text' : 'password'"
@@ -103,7 +124,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { log } from "util";
+
 export default {
   name: "Profile",
   data() {
@@ -188,7 +209,7 @@ export default {
 
           if (res == "logout") {
             this.$auth.logout("local").then(() => {
-              this.$toast.success("Successfully Logout", {
+              this.$toast.success("Login Again", {
                 duration: 5000,
                 action: {
                   text: "Cancel",
