@@ -37,6 +37,7 @@ export default {
     { src: "~/plugins/vee-validate.js", mode: "client" },
     { src: "@/plugins/vue-slick-carousel.js" },
     { src: "~/plugins/wordCountFilter.js" },
+    { src: "~/plugins/backend/mixins/user.js" },
     { src: "~/plugins/backend/mixins/getServerValidationErrors.js" },
     // backend
     { src: "~/plugins/backend/axios.js" }
@@ -97,6 +98,7 @@ export default {
     "@nuxtjs/dotenv",
     "@nuxtjs/toast"
   ],
+
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -130,6 +132,7 @@ export default {
         maxAge: 60 * 60
       }
     },
+    resetOnError: true,
     redirect: {
       login: "/login",
       logout: "/",

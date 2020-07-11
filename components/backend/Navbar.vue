@@ -49,31 +49,19 @@
         <template v-slot:activator="{ on, attrs }">
           <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
             <v-list-item-avatar size="40" role="button">
-              <v-img v-bind="attrs" v-on="on" src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
+              <v-img v-bind="attrs" v-on="on" :src="avatar"></v-img>
             </v-list-item-avatar>
           </v-badge>
         </template>
 
         <v-card>
-          <v-list>
-            <v-list-item>
-              <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
-                <v-list-item-avatar size="40">
-                  <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-                </v-list-item-avatar>
-              </v-badge>
-
-              <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
-                <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
+          <v-card-title class="d-flex justify-center">{{ name }}</v-card-title>
 
           <v-divider></v-divider>
+
           <v-list dense>
             <v-list-item-group v-model="model" color="light-blue lighten-2">
-              <v-list-item dense v-for="(item, i) in adminNavs" :key="i">
+              <v-list-item dense v-for="(item, i) in adminNavs" :key="i" :to="item.to">
                 <v-list-item-icon>
                   <v-icon small v-text="item.icon"></v-icon>
                 </v-list-item-icon>
@@ -81,7 +69,9 @@
                   <v-list-item-title v-text="item.name"></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+
               <v-divider></v-divider>
+
               <v-list-item dense @click.stop="logout">
                 <v-list-item-icon>
                   <v-icon small>fas fa-sign-out-alt</v-icon>
@@ -101,11 +91,11 @@
       <v-list-item class="px-2 py-3">
         <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
           <v-list-item-avatar size="40">
-            <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
+            <v-img :src="avatar"></v-img>
           </v-list-item-avatar>
         </v-badge>
 
-        <v-list-item-title>John Leider</v-list-item-title>
+        <v-list-item-title>{{ name }}</v-list-item-title>
       </v-list-item>
 
       <v-divider></v-divider>
@@ -157,6 +147,7 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Backend-Navbar",
   data() {
@@ -164,7 +155,7 @@ export default {
       model: null,
       drawer: true,
       adminNavs: [
-        { id: 1, name: "Profile", icon: "fas fa-user" },
+        { id: 1, name: "Profile", icon: "fas fa-user", to: "/admin/profile" },
         { id: 2, name: "Settings", icon: "fas fa-cog" }
       ],
       adminDrawerNavs: [
@@ -232,13 +223,24 @@ export default {
       ]
     };
   },
+  computed: {
+    ...mapGetters({ avatar: "user/getAvatar", name: "user/getName" })
+  },
   methods: {
     goPage(to) {
       this.$router.push(`${to}`);
     },
     logout() {
       this.$auth.logout("local").then(() => {
-        this.$toast.success("Successfully Logout");
+        this.$toast.success("Successfully Logout", {
+          duration: 5000,
+          action: {
+            text: "Cancel",
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            }
+          }
+        });
       });
     }
   }

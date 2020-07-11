@@ -127,8 +127,17 @@ export default {
       try {
         if (this.form.email && this.form.password) {
           this.$auth.loginWith("local", { data: this.form }).then(() => {
+            this.$store.dispatch("user/setUser");
             this.$refs.form.reset();
-            this.$toast.success("Successfully Login");
+            this.$toast.success("Successfully Login", {
+              duration: 5000,
+              action: {
+                text: "Cancel",
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                }
+              }
+            });
           });
         }
       } catch (error) {
