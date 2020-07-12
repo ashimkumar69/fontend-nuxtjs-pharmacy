@@ -15,7 +15,7 @@
 <script>
 export default {
   name: "Admin-Chield",
- 
+
   computed: {
     logged() {
       return this.$auth.loggedIn;

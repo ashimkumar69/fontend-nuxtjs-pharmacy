@@ -49,7 +49,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
             <v-list-item-avatar size="40" role="button">
-              <v-img v-bind="attrs" v-on="on" :src="avatar"></v-img>
+              <v-img v-if="avatar" v-bind="attrs" v-on="on" :src="avatar"></v-img>
             </v-list-item-avatar>
           </v-badge>
         </template>
@@ -91,7 +91,7 @@
       <v-list-item class="px-2 py-3">
         <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
           <v-list-item-avatar size="40">
-            <v-img :src="avatar"></v-img>
+            <v-img v-if="avatar" :src="avatar"></v-img>
           </v-list-item-avatar>
         </v-badge>
 
@@ -172,22 +172,8 @@ export default {
         {
           id: 3,
           name: "Categories",
-          icon: "mdi-account-group-outline",
-          children: [
-            {
-              id: 1,
-              icon: "fas fa-file",
-              name: "Read",
-              to: "/admin/categories"
-            },
-            {
-              id: 2,
-              icon: "mdi-plus",
-              name: "Create",
-              to: "/admin/categories/create"
-            },
-            { id: 3, icon: "mdi-update", name: "Update" }
-          ]
+          icon: "fas fa-book",
+          to: "/admin/categories"
         },
         {
           id: 4,
