@@ -6,7 +6,7 @@
           <v-data-table
             :search="search"
             :headers="headers"
-            :items="products"
+            :items="categories"
             sort-by="name"
             class="elevation-1"
           >
@@ -26,8 +26,6 @@
                     clearable
                     label="Search by Categories"
                     type="text"
-                    @click:append="searchIt"
-                    @click:clear="clearSearch"
                     class="mr-2"
                     hide-details
                   ></v-text-field>
@@ -52,14 +50,16 @@
                       <v-container>
                         <v-row>
                           <v-col cols="12">
-                            <v-text-field
-                              color="light-blue lighten-2"
-                              outlined
-                              v-model="editedItem.name"
-                              label="Category Name"
-                              :error-messages="serverErrors.name"
-                              clearable
-                            ></v-text-field>
+                            <v-form ref="form">
+                              <v-text-field
+                                color="light-blue lighten-2"
+                                outlined
+                                v-model="editedItem.name"
+                                label="Category Name"
+                                :error-messages="serverErrors.name"
+                                clearable
+                              ></v-text-field>
+                            </v-form>
                           </v-col>
                         </v-row>
                       </v-container>
@@ -89,6 +89,7 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Categories",
   data() {
@@ -99,57 +100,51 @@ export default {
         {
           text: "Categories",
           align: "start",
-          value: "name"
+          value: "name",
         },
-        { text: "Products", value: "product", filterable: false },
+        { text: "Products", value: "categoryHaveProducts", filterable: false },
         {
           text: "Actions",
           value: "actions",
           sortable: false,
-          filterable: false
-        }
+          filterable: false,
+        },
       ],
-      products: [],
+      // categories: [],
       editedIndex: -1,
       editedItem: {
-        name: null
+        name: null,
       },
       defaultItem: {
-        name: null
+        name: null,
       },
-      itemId: null
+      itemId: null,
     };
   },
-  async asyncData({ $axios }) {
-    try {
-      const res = await $axios.$get("/category");
-      return { products: res.data };
-    } catch (error) {
-      console.log(error);
-    }
-  },
+
   computed: {
+    ...mapGetters({ categories: "categories/getCategories" }),
     formTitle() {
       return this.editedIndex === -1 ? "New Category" : "Edit Category";
-    }
+    },
   },
 
   watch: {
     dialog(val) {
       val || this.close();
-    }
+    },
   },
 
   methods: {
     editItem(item) {
-      this.editedIndex = this.products.indexOf(item);
+      this.editedIndex = this.categories.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
       this.itemId = item.id;
     },
 
     deleteItem(item) {
-      const index = this.products.indexOf(item);
+      const index = this.categories.indexOf(item);
       this.itemId = item.id;
       this.$toast.error("Are you sure you want to delete this item?", {
         action: [
@@ -158,31 +153,42 @@ export default {
             onClick: (e, toastObject) => {
               this.$axios
                 .$delete(`/category/${this.itemId}`)
-                .then(() => {
-                  this.products.splice(index, 1);
+                .then((res) => {
                   toastObject.goAway(0);
-                  this.$toast.success("Successfully Category Deleted", {
-                    duration: 5000,
-                    action: {
-                      text: "Cancel",
-                      onClick: (e, toastObject) => {
-                        toastObject.goAway(0);
-                      }
-                    }
-                  });
+                  if (res == "haveProduct") {
+                    this.$toast.error("Category Have Product.", {
+                      action: {
+                        text: "Cancel",
+                        onClick: (e, toastObject) => {
+                          toastObject.goAway(0);
+                        },
+                      },
+                    });
+                  } else {
+                    this.$store.dispatch("categories/setCategories", res.data);
+                    this.$toast.success("Successfully Category Deleted", {
+                      duration: 5000,
+                      action: {
+                        text: "Cancel",
+                        onClick: (e, toastObject) => {
+                          toastObject.goAway(0);
+                        },
+                      },
+                    });
+                  }
                 })
-                .catch(error => {
+                .catch((error) => {
                   console.log(error);
                 });
-            }
+            },
           },
           {
             text: "Cancel",
             onClick: (e, toastObject) => {
               toastObject.goAway(0);
-            }
-          }
-        ]
+            },
+          },
+        ],
       });
     },
 
@@ -199,48 +205,49 @@ export default {
         if (this.editedItem.name) {
           this.$axios
             .$patch(`/category/${this.itemId}`, this.editedItem)
-            .then(() => {
-              Object.assign(this.products[this.editedIndex], this.editedItem);
+            .then((res) => {
+              this.$store.dispatch("categories/setCategories", res.data);
+
               this.$toast.success("Successfully Category Updated", {
                 duration: 5000,
                 action: {
                   text: "Cancel",
                   onClick: (e, toastObject) => {
                     toastObject.goAway(0);
-                  }
-                }
+                  },
+                },
               });
             })
-            .catch(error => {
+            .catch((error) => {
               console.log(error);
             });
         }
       } else {
         if (this.editedItem.name) {
-          // this.products.push(this.editedItem);
           this.$axios
             .$post("/category", this.editedItem)
-            .then(res => {
-              this.products = res.data;
+            .then((res) => {
+              this.$refs.form.reset();
+              this.$store.dispatch("categories/setCategories", res.data);
+
               this.$toast.success("Successfully Category Crated", {
                 duration: 5000,
                 action: {
                   text: "Cancel",
                   onClick: (e, toastObject) => {
                     toastObject.goAway(0);
-                  }
-                }
+                  },
+                },
               });
             })
-            .catch(error => {
+            .catch((error) => {
               console.log(error);
             });
         }
       }
       // this.close();
     },
-    searchIt() {},
-    clearSearch() {}
-  }
+    clearSearch() {},
+  },
 };
 </script>

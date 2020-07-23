@@ -6,9 +6,10 @@
           <v-card shaped>
             <v-card-text class="d-flex flex-column align-center">
               <v-avatar size="100">
-                <v-img :src="avatar"></v-img>
+                <v-img v-if="avatar" :src="avatar"></v-img>
+                <v-img v-else :src="user.avatar"></v-img>
               </v-avatar>
-              <v-card-title>{{ name }}</v-card-title>
+              <v-card-title>{{ user.name }}</v-card-title>
             </v-card-text>
             <v-divider></v-divider>
             <v-subheader>Personal Details</v-subheader>
@@ -19,7 +20,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ phone }}</v-list-item-title>
+                  <v-list-item-title>{{ user.phone }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -28,7 +29,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ email }}</v-list-item-title>
+                  <v-list-item-title>{{ user.email }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -37,7 +38,7 @@
                 </v-list-item-icon>
 
                 <v-list-item-content>
-                  <v-list-item-title>{{ address }}</v-list-item-title>
+                  <v-list-item-title>{{ user.address }}</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -137,18 +138,15 @@ export default {
         phone: null,
         email: null,
         address: null,
-        password: null
-      }
+        password: null,
+      },
+      avatar: null,
     };
   },
   computed: {
     ...mapGetters({
-      avatar: "user/getAvatar",
-      name: "user/getName",
-      phone: "user/getPhone",
-      email: "user/getEmail",
-      address: "user/getAddress"
-    })
+      user: "user/getUser",
+    }),
   },
 
   methods: {
@@ -167,8 +165,8 @@ export default {
     readFile(file) {
       let reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = e => {
-        this.$store.dispatch("user/setAvatar", e.target.result);
+      reader.onload = (e) => {
+        this.avatar = e.target.result;
       };
     },
     submitForm() {
@@ -194,17 +192,17 @@ export default {
 
       this.$axios
         .$post("/user/detail", form)
-        .then(res => {
+        .then((res) => {
           this.$refs.form.reset();
-          this.$store.dispatch("user/setUser");
+          this.$store.dispatch("user/fetchUser");
           this.$toast.success("Successfully Edit Profile", {
             duration: 5000,
             action: {
               text: "Cancel",
               onClick: (e, toastObject) => {
                 toastObject.goAway(0);
-              }
-            }
+              },
+            },
           });
 
           if (res == "logout") {
@@ -215,17 +213,17 @@ export default {
                   text: "Cancel",
                   onClick: (e, toastObject) => {
                     toastObject.goAway(0);
-                  }
-                }
+                  },
+                },
               });
             });
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

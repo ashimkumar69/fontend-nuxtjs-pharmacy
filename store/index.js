@@ -3,11 +3,12 @@ export const actions = {
     try {
       if (this.$auth.loggedIn) {
         const user = await this.$axios.$get("/auth/user");
-        dispatch("user/setName", user.data.name);
-        dispatch("user/setPhone", user.data.phone);
-        dispatch("user/setEmail", user.data.email);
-        dispatch("user/setAddress", user.data.address);
-        dispatch("user/setAvatar", user.data.avatar);
+        const categories = await this.$axios.$get("/category");
+        const products = await this.$axios.$get("/product");
+
+        dispatch("user/setUser", user.data);
+        dispatch("categories/setCategories", categories.data);
+        dispatch("products/setProducts", products.data);
       }
     } catch (error) {}
   }

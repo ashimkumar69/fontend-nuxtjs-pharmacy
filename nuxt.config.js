@@ -129,7 +129,7 @@ export default {
 
       options: {
         path: "/",
-        maxAge: 60 * 60
+        maxAge: 60 * 60 * 24
       }
     },
     resetOnError: true,

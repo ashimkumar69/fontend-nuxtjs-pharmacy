@@ -28,11 +28,43 @@
               <span class="ml-2 text-capitalize">{{ item.name }}</span>
             </v-btn>
           </template>
+          <template v-if="this.$auth.loggedIn">
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-badge
+                  bordered
+                  bottom
+                  color="light-blue lighten-2"
+                  dot
+                  offset-x="25"
+                  offset-y="20"
+                >
+                  <v-list-item-avatar size="40" role="button">
+                    <v-img v-if="user.avatar" v-bind="attrs" v-on="on" :src="user.avatar"></v-img>
+                  </v-list-item-avatar>
+                </v-badge>
+              </template>
 
-          <v-btn outlined color="light-blue lighten-2" :to="{name:'login'}">
-            <v-icon small>fas fa-sign-in-alt</v-icon>
-            <span class="ml-2 text-capitalize">Login</span>
-          </v-btn>
+              <v-list dense>
+                <v-list-item to="/admin">
+                  <v-list-item-content>
+                    <v-list-item-title class="text-capitalize">Dashbord</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item @click.stop="logout">
+                  <v-list-item-content>
+                    <v-list-item-title class="text-capitalize">Logout</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+          </template>
+          <template v-else>
+            <v-btn outlined color="light-blue lighten-2" :to="{name:'login'}">
+              <v-icon small>fas fa-sign-in-alt</v-icon>
+              <span class="ml-2 text-capitalize">Login</span>
+            </v-btn>
+          </template>
         </v-sheet>
       </v-container>
     </v-app-bar>
@@ -67,6 +99,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
   data() {
@@ -78,44 +111,47 @@ export default {
           id: 1,
           name: "All Medicine",
           icon: "fas fa-file-medical",
-          to: "/products"
+          to: "/products",
         },
         { id: 2, name: "Blogs", icon: "fas fa-blog", to: "/blogs" },
         {
           id: 3,
           name: "Contact Us",
           icon: "fas fa-address-card",
-          to: "/contact"
-        }
+          to: "/contact",
+        },
       ],
       drawerNavs: [
         {
           id: 1,
           name: "Home",
           icon: "fas fa-home",
-          to: "/"
+          to: "/",
         },
         {
           id: 2,
           name: "All Medicine",
           icon: "fas fa-file-medical",
-          to: "/products"
+          to: "/products",
         },
         { id: 3, name: "Blogs", icon: "fas fa-blog", to: "/blogs" },
         {
           id: 4,
           name: "Contact Us",
           icon: "fas fa-address-card",
-          to: "/contact"
+          to: "/contact",
         },
         {
           id: 5,
           name: "Login",
           icon: "fas fa-sign-in-alt",
-          to: "/login"
-        }
-      ]
+          to: "/login",
+        },
+      ],
     };
+  },
+  computed: {
+    ...mapGetters({ user: "user/getUser" }),
   },
   methods: {
     goIndexPage() {
@@ -123,8 +159,21 @@ export default {
     },
     goPage(to) {
       this.$router.push(`${to}`);
-    }
-  }
+    },
+    logout() {
+      this.$auth.logout("local").then(() => {
+        this.$toast.success("Successfully Logout", {
+          duration: 5000,
+          action: {
+            text: "Cancel",
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      });
+    },
+  },
 };
 </script>
 

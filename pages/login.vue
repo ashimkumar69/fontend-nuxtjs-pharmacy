@@ -113,11 +113,11 @@ export default {
     return {
       form: {
         email: null,
-        password: null
+        password: null,
       },
       passwordShow: false,
       absolute: true,
-      opacity: 0.1
+      opacity: 0.1,
     };
   },
 
@@ -127,7 +127,9 @@ export default {
       try {
         if (this.form.email && this.form.password) {
           this.$auth.loginWith("local", { data: this.form }).then(() => {
-            this.$store.dispatch("user/setUser");
+            this.$store.dispatch("user/fetchUser");
+            this.$store.dispatch("products/fetchProducts");
+            this.$store.dispatch("categories/fetchCategories");
             this.$refs.form.reset();
             this.$toast.success("Successfully Login", {
               duration: 5000,
@@ -135,8 +137,8 @@ export default {
                 text: "Cancel",
                 onClick: (e, toastObject) => {
                   toastObject.goAway(0);
-                }
-              }
+                },
+              },
             });
           });
         }
@@ -154,8 +156,8 @@ export default {
     },
     goForgotPage() {
       this.$router.push("/reset-password-email");
-    }
-  }
+    },
+  },
 };
 </script>
 

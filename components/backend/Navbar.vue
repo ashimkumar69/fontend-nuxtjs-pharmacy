@@ -3,7 +3,7 @@
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Pharmacy</v-toolbar-title>
+      <v-toolbar-title role="button" @click="goIndexPage">Pharmacy</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <v-btn class="mr-2" icon>
@@ -49,13 +49,13 @@
         <template v-slot:activator="{ on, attrs }">
           <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
             <v-list-item-avatar size="40" role="button">
-              <v-img v-if="avatar" v-bind="attrs" v-on="on" :src="avatar"></v-img>
+              <v-img v-if="user.avatar" v-bind="attrs" v-on="on" :src="user.avatar"></v-img>
             </v-list-item-avatar>
           </v-badge>
         </template>
 
         <v-card width="200px">
-          <v-card-title class="d-flex justify-center">{{ name }}</v-card-title>
+          <v-card-title class="d-flex justify-center">{{ user.name }}</v-card-title>
 
           <v-divider></v-divider>
 
@@ -91,11 +91,11 @@
       <v-list-item class="px-2 py-3">
         <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
           <v-list-item-avatar size="40">
-            <v-img v-if="avatar" :src="avatar"></v-img>
+            <v-img v-if="user.avatar" :src="user.avatar"></v-img>
           </v-list-item-avatar>
         </v-badge>
 
-        <v-list-item-title>{{ name }}</v-list-item-title>
+        <v-list-item-title>{{ user.name }}</v-list-item-title>
       </v-list-item>
 
       <v-divider></v-divider>
@@ -156,7 +156,7 @@ export default {
       drawer: true,
       adminNavs: [
         { id: 1, name: "Profile", icon: "fas fa-user", to: "/admin/profile" },
-        { id: 2, name: "Settings", icon: "fas fa-cog", to: "/admin/setting" }
+        { id: 2, name: "Settings", icon: "fas fa-cog", to: "/admin/setting" },
       ],
       adminDrawerNavs: [
         { id: 1, name: "Dashboord", icon: "mdi-home-city", to: "/admin" },
@@ -166,24 +166,28 @@ export default {
           icon: "mdi-account-group-outline",
           children: [
             { id: 1, icon: "fas fa-file", name: "Read" },
-            { id: 2, icon: "mdi-update", name: "Update" }
-          ]
+            { id: 2, icon: "mdi-update", name: "Update" },
+          ],
         },
         {
           id: 3,
           name: "Categories",
           icon: "fas fa-book",
-          to: "/admin/categories"
+          to: "/admin/categories",
         },
         {
           id: 4,
           name: "Products",
           icon: "fas fa-box",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read" },
-            { id: 2, icon: "mdi-plus", name: "Create" },
-            { id: 3, icon: "mdi-update", name: "Update" }
-          ]
+            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/products" },
+            {
+              id: 2,
+              icon: "fas fa-trash",
+              name: "Trash",
+              to: "/admin/products/trash",
+            },
+          ],
         },
         {
           id: 5,
@@ -192,8 +196,8 @@ export default {
           children: [
             { id: 1, icon: "fas fa-file", name: "Read" },
             { id: 2, icon: "mdi-plus", name: "Create" },
-            { id: 3, icon: "mdi-update", name: "Update" }
-          ]
+            { id: 3, icon: "mdi-update", name: "Update" },
+          ],
         },
         { id: 6, name: "Contact", icon: "fas fa-address-card" },
         {
@@ -203,14 +207,14 @@ export default {
           children: [
             { id: 1, icon: "fas fa-file", name: "Read" },
             { id: 2, icon: "mdi-plus", name: "Create" },
-            { id: 3, icon: "mdi-update", name: "Update" }
-          ]
-        }
-      ]
+            { id: 3, icon: "mdi-update", name: "Update" },
+          ],
+        },
+      ],
     };
   },
   computed: {
-    ...mapGetters({ avatar: "user/getAvatar", name: "user/getName" })
+    ...mapGetters({ user: "user/getUser" }),
   },
   methods: {
     goPage(to) {
@@ -224,11 +228,14 @@ export default {
             text: "Cancel",
             onClick: (e, toastObject) => {
               toastObject.goAway(0);
-            }
-          }
+            },
+          },
         });
       });
-    }
-  }
+    },
+    goIndexPage() {
+      this.$router.push("/");
+    },
+  },
 };
 </script>
