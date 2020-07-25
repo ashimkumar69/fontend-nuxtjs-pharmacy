@@ -128,8 +128,9 @@ export default {
         if (this.form.email && this.form.password) {
           this.$auth.loginWith("local", { data: this.form }).then(() => {
             this.$store.dispatch("user/fetchUser");
-            this.$store.dispatch("products/fetchProducts");
             this.$store.dispatch("categories/fetchCategories");
+            this.$store.dispatch("products/fetchProducts");
+            this.$store.dispatch("blogs/fetchBlogs");
             this.$refs.form.reset();
             this.$toast.success("Successfully Login", {
               duration: 5000,

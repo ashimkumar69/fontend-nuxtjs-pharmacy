@@ -5,10 +5,12 @@ export const actions = {
         const user = await this.$axios.$get("/auth/user");
         const categories = await this.$axios.$get("/category");
         const products = await this.$axios.$get("/product");
+        const blogs = await this.$axios.$get("/blog");
 
         dispatch("user/setUser", user.data);
         dispatch("categories/setCategories", categories.data);
         dispatch("products/setProducts", products.data);
+        dispatch("blogs/setBlogs", blogs.data);
       }
     } catch (error) {}
   }

@@ -40,12 +40,13 @@ export default {
     { src: "~/plugins/backend/mixins/user.js" },
     { src: "~/plugins/backend/mixins/getServerValidationErrors.js" },
     // backend
-    { src: "~/plugins/backend/axios.js" }
+    { src: "~/plugins/backend/axios.js" },
+    { src: "~/plugins/backend/vue2-editor.js", mode: "client" }
   ],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ["@nuxtjs/vuetify", "@nuxtjs/moment"],
   vuetify: {
     customVariables: ["@/assets/scss/customVuetifyVariables.scss"],
     treeShake: true,

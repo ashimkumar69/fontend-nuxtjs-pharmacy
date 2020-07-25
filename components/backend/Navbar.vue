@@ -194,9 +194,13 @@ export default {
           name: "Blogs",
           icon: "fas fa-blog",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read" },
-            { id: 2, icon: "mdi-plus", name: "Create" },
-            { id: 3, icon: "mdi-update", name: "Update" },
+            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/blogs" },
+            {
+              id: 2,
+              icon: "fas fa-trash",
+              name: "Trash",
+              to: "/admin/blogs/trash",
+            },
           ],
         },
         { id: 6, name: "Contact", icon: "fas fa-address-card" },
