@@ -9,14 +9,14 @@
             show-select
             :search="search"
             :headers="headers"
-            :items="blogs"
+            :items="contacts"
             sort-by="title"
             class="elevation-1"
             show-expand
           >
             <template v-slot:top>
               <v-toolbar flat color="white">
-                <v-toolbar-title>Blogs Trash</v-toolbar-title>
+                <v-toolbar-title>Contacts Trash</v-toolbar-title>
 
                 <v-spacer></v-spacer>
                 <v-col cols="5">
@@ -28,7 +28,7 @@
                     dense
                     clear-icon="mdi-close-circle"
                     clearable
-                    label="Search by Title"
+                    label="Search by Name and Subject"
                     type="text"
                     hide-details
                   ></v-text-field>
@@ -36,34 +36,54 @@
               </v-toolbar>
             </template>
             <template v-slot:item.actions="{ item }">
-              <v-icon small class="mr-2" @click="blogRestore(item.id)">fas fa-trash-restore</v-icon>
+              <v-icon small class="mr-2" @click="restore(item.id)">fas fa-trash-restore</v-icon>
             </template>
             <template v-slot:no-data>No Data</template>
             <template v-slot:expanded-item="{ headers, item }">
               <td :colspan="headers.length">
                 <v-card flat color="grey lighten-4">
-                  <v-img contain aspect-ratio="1.7" :src="item.picture" height="400px"></v-img>
                   <v-card-text>
                     <v-list color="grey lighten-4">
-                      <v-subheader>Blog Details</v-subheader>
+                      <v-subheader>Contact Details</v-subheader>
                       <v-list-item>
                         <v-list-item-content>
-                          <v-list-item-title>Published Date: {{item.published_at}}</v-list-item-title>
+                          <v-list-item-title>Name: {{item.name}}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                       <v-list-item>
                         <v-list-item-content>
-                          <v-list-item-title>Title: {{item.title}}</v-list-item-title>
+                          <v-list-item-title>Email: {{item.email}}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                       <v-list-item>
                         <v-list-item-content>
-                          <v-list-item-title>Body:</v-list-item-title>
-                          <v-list-item-title v-html="item.body"></v-list-item-title>
+                          <v-list-item-title>Phone: {{item.phone}}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>Subject: {{item.subject}}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>Comment:</v-list-item-title>
+                          <v-list-item-title v-html="item.comment"></v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                     </v-list>
                   </v-card-text>
+                  <v-card-actions>
+                    <v-btn
+                      v-if="item.file.file !== null"
+                      dark
+                      color="light-blue lighten-2"
+                      @click="getContactFile(item.file)"
+                    >
+                      <v-icon class="mr-2">fas fa-cloud-download-alt</v-icon>
+                      <span>Download</span>
+                    </v-btn>
+                  </v-card-actions>
                 </v-card>
               </td>
             </template>
@@ -83,18 +103,18 @@
 
 <script>
 export default {
-  name: "Blogs-Trash",
+  name: "Contacts-Trash",
   data() {
     return {
       dialog: false,
       search: "",
       headers: [
         {
-          text: "Title",
+          text: "Name",
           align: "start",
-          value: "title",
+          value: "name",
         },
-        { text: "Published", value: "published_at", filterable: false },
+        { text: "Subject", value: "subject" },
 
         {
           text: "Actions",
@@ -104,15 +124,15 @@ export default {
         },
         { text: "", value: "data-table-expand" },
       ],
-      blogs: [],
+      contacts: [],
       selected: [],
     };
   },
   async asyncData({ $axios }) {
     try {
-      const blogs = await $axios.$get("/blogTrash");
+      const contacts = await $axios.$get("/contactTrash");
 
-      return { blogs: blogs.data };
+      return { contacts: contacts.data };
     } catch (error) {
       console.log(error);
     }
@@ -127,12 +147,12 @@ export default {
             text: "Delete",
             onClick: (e, toastObject) => {
               this.$axios
-                .$post("/blogForceDelete", { selected: selected })
+                .$post("/contactForceDelete", { selected: selected })
                 .then((res) => {
-                  this.blogs = res.data;
+                  this.contacts = res.data;
                   this.selected = [];
                   toastObject.goAway(0);
-                  this.$toast.success("Successfully Blog Deleted", {
+                  this.$toast.success("Successfully Contact Deleted", {
                     duration: 5000,
                     action: {
                       text: "Cancel",
@@ -156,12 +176,11 @@ export default {
         ],
       });
     },
-    blogRestore(id) {
+    restore(id) {
       try {
-        this.$axios.$post("/blogRestore", { id: id }).then((res) => {
-          this.blogs = res.data;
-          this.$store.dispatch("blogs/fetchBlogs");
-          this.$toast.success("Successfully Blog Restore", {
+        this.$axios.$post("/contactRestore", { id: id }).then((res) => {
+          this.contacts = res.data;
+          this.$toast.success("Successfully Contact Restore", {
             duration: 5000,
             action: {
               text: "Cancel",

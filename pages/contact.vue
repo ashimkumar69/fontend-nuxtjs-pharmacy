@@ -74,17 +74,17 @@
                           label="Comment"
                         ></v-textarea>
                       </ValidationProvider>
-                      <ValidationProvider v-slot="{ errors }" name="files" rules="required">
+                      <ValidationProvider v-slot="{ errors,getFile }" name="file" rules="ext:zip">
                         <v-file-input
+                          v-model="form.file"
+                          type="file"
                           color="light-blue lighten-2"
-                          v-model="form.files"
+                          @change="getFile"
                           :error-messages="errors"
                           show-size
-                          counter
-                          multiple
                           outlined
                           dense
-                          label="File input (Optional)"
+                          label="File Must Be Zip (Optional)"
                         >
                           <template v-slot:selection="{ text }">
                             <v-chip small label color="light-blue lighten-2">{{ text }}</v-chip>
@@ -121,20 +121,72 @@ export default {
         phone: null,
         subject: null,
         comment: null,
-        files: []
-      }
+        file: null,
+      },
     };
   },
   methods: {
     submit() {
       this.$refs.observer.validate();
-      this.$refs.form.reset();
+
+      const form = new FormData();
+
+      if (this.form.name) {
+        form.append("name", this.form.name);
+      }
+      if (this.form.email) {
+        form.append("email", this.form.email);
+      }
+      if (this.form.phone) {
+        form.append("phone", this.form.phone);
+      }
+      if (this.form.subject) {
+        form.append("subject", this.form.subject);
+      }
+      if (this.form.comment) {
+        form.append("comment", this.form.comment);
+      }
+      if (this.form.file) {
+        form.append("file", this.form.file);
+      }
+      this.$axios
+        .$post("/contact", form)
+        .then((res) => {
+          this.$refs.form.reset();
+          this.$refs.observer.reset();
+          // this.$store.dispatch("blogs/setBlogs", res.data);
+
+          this.$toast.success("Successfully Submitted", {
+            duration: 5000,
+            action: {
+              text: "Cancel",
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     clear() {
       this.$refs.form.reset();
       this.$refs.observer.reset();
-    }
-  }
+    },
+    getFile(e) {
+      this.form.file = null;
+      const file = e;
+      let ext = file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2);
+      let extTypes = "zip";
+
+      if (file !== undefined) {
+        if (ext.match(extTypes)) {
+          this.form.file = file;
+        }
+      }
+    },
+  },
 };
 </script>
 

@@ -15,7 +15,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-badge bordered bottom color="light-blue lighten-2" dot offset-x="25" offset-y="20">
             <v-list-item-avatar size="40" role="button">
-              <v-img v-bind="attrs" v-on="on" src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
+              <v-img v-bind="attrs" v-on="on" v-if="user.avatar" :src="user.avatar"></v-img>
             </v-list-item-avatar>
           </v-badge>
         </template>
@@ -32,15 +32,18 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Blank-Navbar",
-
+  computed: {
+    ...mapGetters({ user: "user/getUser" }),
+  },
   methods: {
     logout() {
       this.$auth.logout("local").then(() => {
         this.$toast.success("Successfully Logout");
       });
-    }
-  }
+    },
+  },
 };
 </script>

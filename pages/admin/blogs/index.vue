@@ -25,7 +25,7 @@
                     dense
                     clear-icon="mdi-close-circle"
                     clearable
-                    label="Search by Products and Generic"
+                    label="Search by Title"
                     type="text"
                     class="mr-2"
                     hide-details
@@ -278,14 +278,14 @@ export default {
 
     deleteItem(item) {
       // const index = this.blogs.indexOf(item);
-      this.itemId = item.id;
+
       this.$toast.error("Are you sure you want to delete this item?", {
         action: [
           {
             text: "Delete",
             onClick: (e, toastObject) => {
               this.$axios
-                .$delete(`/blog/${this.itemId}`)
+                .$delete(`/blog/${item.id}`)
                 .then((res) => {
                   this.$store.dispatch("blogs/setBlogs", res.data);
 

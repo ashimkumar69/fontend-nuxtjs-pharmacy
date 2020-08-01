@@ -333,14 +333,14 @@ export default {
 
     deleteItem(item) {
       const index = this.products.indexOf(item);
-      this.itemId = item.id;
+
       this.$toast.error("Are you sure you want to delete this item?", {
         action: [
           {
             text: "Delete",
             onClick: (e, toastObject) => {
               this.$axios
-                .$delete(`/product/${this.itemId}`)
+                .$delete(`/product/${item.id}`)
                 .then((res) => {
                   this.$store.dispatch("products/setProducts", res.data);
                   this.$store.dispatch("categories/fetchCategories");

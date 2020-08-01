@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { required, email, min, confirmed } from "vee-validate/dist/rules";
+import { required, email, min, confirmed, ext } from "vee-validate/dist/rules";
 import {
   extend,
   ValidationObserver,
@@ -27,6 +27,11 @@ extend("email", {
 extend("confirmed", {
   ...confirmed,
   message: "The {_field_} field confirmation does not match"
+});
+
+extend("ext", {
+  ...ext,
+  message: "File Must Be .zip Format"
 });
 
 Vue.component("ValidationProvider", ValidationProvider);

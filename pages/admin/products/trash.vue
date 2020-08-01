@@ -28,7 +28,7 @@
                     dense
                     clear-icon="mdi-close-circle"
                     clearable
-                    label="Search by Trash Products"
+                    label="Search by Products and Generic"
                     type="text"
                     hide-details
                   ></v-text-field>
@@ -137,7 +137,7 @@ export default {
         },
         { text: "Category", value: "category_id", filterable: false },
         { text: "Price", value: "mrp", filterable: false },
-        { text: "Generic", value: "generic", filterable: false },
+        { text: "Generic", value: "generic" },
         { text: "Manufactured", value: "manufactured", filterable: false },
         {
           text: "Actions",

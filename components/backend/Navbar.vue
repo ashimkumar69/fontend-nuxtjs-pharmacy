@@ -203,13 +203,26 @@ export default {
             },
           ],
         },
-        { id: 6, name: "Contact", icon: "fas fa-address-card" },
+        {
+          id: 6,
+          name: "Contact",
+          icon: "fas fa-address-card",
+          children: [
+            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/contacts" },
+            {
+              id: 2,
+              icon: "fas fa-trash",
+              name: "Trash",
+              to: "/admin/contacts/trash",
+            },
+          ],
+        },
         {
           id: 7,
           name: "User Feedback",
           icon: "fas fa-comments",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read" },
+            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/feedback" },
             { id: 2, icon: "mdi-plus", name: "Create" },
             { id: 3, icon: "mdi-update", name: "Update" },
           ],

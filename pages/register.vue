@@ -146,10 +146,10 @@ export default {
         name: null,
         email: null,
         password: null,
-        password_confirmation: null
+        password_confirmation: null,
       },
       passwordShow: false,
-      password_confirmationShow: false
+      password_confirmationShow: false,
     };
   },
   methods: {
@@ -162,9 +162,18 @@ export default {
           this.form.password &&
           this.form.password_confirmation
         ) {
-          this.$axios.$post("/auth/register", this.form).then(res => {
+          this.$axios.$post("/auth/register", this.form).then((res) => {
             this.$refs.form.reset();
-            this.$toast.success("Successfully Register");
+
+            this.$toast.success("Successfully Register", {
+              duration: 5000,
+              action: {
+                text: "Cancel",
+                onClick: (e, toastObject) => {
+                  toastObject.goAway(0);
+                },
+              },
+            });
             this.$router.push("/login");
           });
         }
@@ -177,8 +186,8 @@ export default {
     },
     goLoginPage() {
       this.$router.push("/login");
-    }
-  }
+    },
+  },
 };
 </script>
 
