@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "Feedback-Parent",
+  name: "UserFeedback-Parent",
 };
 </script>
 

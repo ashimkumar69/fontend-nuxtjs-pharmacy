@@ -1,5 +1,12 @@
 import Vue from "vue";
-import { required, email, min, confirmed, ext } from "vee-validate/dist/rules";
+import {
+  required,
+  email,
+  min,
+  confirmed,
+  ext,
+  max
+} from "vee-validate/dist/rules";
 import {
   extend,
   ValidationObserver,

@@ -222,9 +222,18 @@ export default {
           name: "User Feedback",
           icon: "fas fa-comments",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/feedback" },
-            { id: 2, icon: "mdi-plus", name: "Create" },
-            { id: 3, icon: "mdi-update", name: "Update" },
+            {
+              id: 1,
+              icon: "fas fa-file",
+              name: "Give Feedback",
+              to: "/admin/userfeedback",
+            },
+            {
+              id: 2,
+              icon: "fas fa-comments",
+              name: "All Feedback",
+              to: "/admin/userfeedback/allfeedback",
+            },
           ],
         },
       ],
