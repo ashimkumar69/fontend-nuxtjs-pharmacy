@@ -164,10 +164,7 @@ export default {
           id: 2,
           name: "Users",
           icon: "mdi-account-group-outline",
-          children: [
-            { id: 1, icon: "fas fa-file", name: "Read" },
-            { id: 2, icon: "mdi-update", name: "Update" },
-          ],
+          to: "/admin/user",
         },
         {
           id: 3,
