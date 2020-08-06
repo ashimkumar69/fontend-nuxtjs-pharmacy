@@ -11,19 +11,19 @@
               <v-btn
                 color="light-blue lighten-2"
                 dark
-                class="mb-2 text-capitalize"
+                class="mr-3 text-capitalize"
                 @click="editItem"
               >Edit</v-btn>
               <v-dialog v-model="dialog" max-width="700px">
-                <!-- <template v-slot:activator="{ on, attrs }">
+                <template v-slot:activator="{ on, attrs }">
                   <v-btn
                     color="light-blue lighten-2"
                     dark
-                    class="mb-2 text-capitalize"
+                    class="text-capitalize"
                     v-bind="attrs"
                     v-on="on"
                   >Create</v-btn>
-                </template>-->
+                </template>
 
                 <v-card>
                   <v-card-title>
@@ -252,7 +252,7 @@ export default {
         address: null,
       },
       itemId: null,
-      // categories: null,
+
       customToolbar: [
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
         ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -300,7 +300,7 @@ export default {
   methods: {
     editItem() {
       this.editedIndex = 1;
-      this.editedItem = this.footer;
+      // this.editedItem = this.footer;
       this.dialog = true;
       this.itemId = this.footer.id;
       this.editedItem.logo = null;
@@ -347,7 +347,7 @@ export default {
 
     close() {
       this.$store.dispatch("serverValidationErrors/clearErrors");
-      this.$refs.form.reset();
+      // this.$refs.form.reset();
       this.dialog = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
@@ -444,20 +444,32 @@ export default {
         this.$axios
           .$post("/footer", form)
           .then((res) => {
-            this.footer = res.data;
-
-            // this.$refs.form.reset();
-            // this.$store.dispatch("products/setProducts", res.data);
-            // this.$store.dispatch("categories/fetchCategories");
-            this.$toast.success("Successfully Footer Created", {
-              duration: 5000,
-              action: {
-                text: "Cancel",
-                onClick: (e, toastObject) => {
-                  toastObject.goAway(0);
+            if (res == "haveFooter") {
+              this.$toast.error("Already Footer Created", {
+                duration: 5000,
+                action: {
+                  text: "Cancel",
+                  onClick: (e, toastObject) => {
+                    toastObject.goAway(0);
+                  },
                 },
-              },
-            });
+              });
+            } else {
+              this.footer = res.data;
+
+              // this.$refs.form.reset();
+              // this.$store.dispatch("products/setProducts", res.data);
+              // this.$store.dispatch("categories/fetchCategories");
+              this.$toast.success("Successfully Footer Created", {
+                duration: 5000,
+                action: {
+                  text: "Cancel",
+                  onClick: (e, toastObject) => {
+                    toastObject.goAway(0);
+                  },
+                },
+              });
+            }
           })
           .catch((error) => {
             console.log(error);

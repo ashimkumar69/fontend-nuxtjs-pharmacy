@@ -57,21 +57,38 @@ export default {
   data() {
     return {
       form: {
-        email: null
-      }
+        email: null,
+      },
     };
   },
   methods: {
     submit() {
       this.$refs.observer.validate();
-      this.$refs.form.reset();
+
+      this.$axios
+        .$post("/auth/password/email", this.form)
+        .then((res) => {
+          this.$refs.form.reset();
+          this.$toast.success(res.meassage, {
+            duration: 5000,
+            action: {
+              text: "Cancel",
+              onClick: (e, toastObject) => {
+                toastObject.goAway(0);
+              },
+            },
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     clear() {
       this.$refs.form.reset();
       this.$refs.observer.reset();
       this.$store.dispatch("serverValidationErrors/clearErrors");
-    }
-  }
+    },
+  },
 };
 </script>
 
