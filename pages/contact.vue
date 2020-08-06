@@ -152,9 +152,10 @@ export default {
       this.$axios
         .$post("/contact", form)
         .then((res) => {
+         
+          // this.$store.dispatch("contacts/setContacts", res.data);
           this.$refs.form.reset();
           this.$refs.observer.reset();
-          // this.$store.dispatch("blogs/setBlogs", res.data);
 
           this.$toast.success("Successfully Submitted", {
             duration: 5000,

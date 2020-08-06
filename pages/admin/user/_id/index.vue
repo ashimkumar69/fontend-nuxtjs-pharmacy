@@ -93,6 +93,7 @@
 <script>
 export default {
   name: "Single-User",
+  
   data() {
     return {
       search: "",

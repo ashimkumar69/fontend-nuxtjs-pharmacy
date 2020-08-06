@@ -92,6 +92,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Categories",
+  middleware: "allowSuperAdminOrAdmin",
   data() {
     return {
       dialog: false,
@@ -144,15 +145,15 @@ export default {
     },
 
     deleteItem(item) {
-      const index = this.categories.indexOf(item);
-      this.itemId = item.id;
+      // const index = this.categories.indexOf(item);
+      // this.itemId = item.id;
       this.$toast.error("Are you sure you want to delete this item?", {
         action: [
           {
             text: "Delete",
             onClick: (e, toastObject) => {
               this.$axios
-                .$delete(`/category/${this.itemId}`)
+                .$delete(`/category/${item.id}`)
                 .then((res) => {
                   toastObject.goAway(0);
                   if (res == "haveProduct") {
@@ -193,6 +194,8 @@ export default {
     },
 
     close() {
+      this.$store.dispatch("serverValidationErrors/clearErrors");
+      this.$refs.form.reset();
       this.dialog = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
@@ -230,7 +233,7 @@ export default {
               this.$refs.form.reset();
               this.$store.dispatch("categories/setCategories", res.data);
 
-              this.$toast.success("Successfully Category Crated", {
+              this.$toast.success("Successfully Category Created", {
                 duration: 5000,
                 action: {
                   text: "Cancel",
@@ -247,7 +250,6 @@ export default {
       }
       // this.close();
     },
-    clearSearch() {},
   },
 };
 </script>

@@ -6,7 +6,8 @@
 
 <script>
 export default {
-  name: "Products-Parent"
+  name: "Products-Parent",
+  middleware: "allowSuperAdminOrAdmin",
 };
 </script>
 

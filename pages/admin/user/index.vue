@@ -96,6 +96,7 @@
 <script>
 export default {
   name: "User-Chield",
+ 
   data() {
     return {
       search: "",
@@ -132,7 +133,19 @@ export default {
 
   methods: {
     userSetting(item) {
-      this.$router.push({ name: "admin-user-id", params: { id: item.id } });
+      if (this.$auth.user.role == "Super Admin") {
+        this.$router.push({ name: "admin-user-id", params: { id: item.id } });
+      } else {
+        this.$toast.error("You Are not Authorished", {
+          duration: 5000,
+          action: {
+            text: "Cancel",
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0);
+            },
+          },
+        });
+      }
     },
   },
 };

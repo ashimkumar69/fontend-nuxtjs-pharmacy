@@ -94,6 +94,7 @@
 
 
 <script>
+// import { mapGetters } from "vuex";
 export default {
   name: "Contacts-Child",
   data() {
@@ -128,7 +129,12 @@ export default {
       console.log(error);
     }
   },
-
+  // created() {
+  //   this.$store.dispatch("contacts/fetchContacts");
+  // },
+  // computed: {
+  //   ...mapGetters({ contacts: "contacts/getContacts" }),
+  // },
   methods: {
     deleteItem(item) {
       this.$toast.error("Are you sure you want to delete this item?", {

@@ -164,6 +164,7 @@
 <script>
 export default {
   name: "UserFeedback-Chield",
+  middleware: "allowUser",
   data() {
     return {
       dialog: false,

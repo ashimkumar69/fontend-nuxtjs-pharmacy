@@ -46,6 +46,7 @@
 <script>
 export default {
   name: "Admin-Chield",
+  middleware: "allowSuperAdminOrAdmin",
   data() {
     return {
       totalDetailsIndex: {},

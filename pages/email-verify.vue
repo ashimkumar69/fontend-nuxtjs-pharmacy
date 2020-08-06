@@ -26,7 +26,6 @@
 export default {
   name: "Email-Verify",
   layout: "emailverifylayout",
-  // auth: false,
 
   methods: {
     async semVerifyMail() {

@@ -131,6 +131,14 @@ export default {
             this.$store.dispatch("categories/fetchCategories");
             this.$store.dispatch("products/fetchProducts");
             this.$store.dispatch("blogs/fetchBlogs");
+            if (
+              this.$auth.user.role == "Super Admin" ||
+              this.$auth.user.role == "Admin"
+            ) {
+              this.$router.push({ name: "admin" });
+            } else {
+              this.$router.push({ name: "admin-userdashbord" });
+            }
             this.$refs.form.reset();
             this.$toast.success("Successfully Login", {
               duration: 5000,

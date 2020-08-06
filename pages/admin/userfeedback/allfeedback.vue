@@ -113,6 +113,7 @@
 <script>
 export default {
   name: "UserFeedback-Chield",
+  middleware: "allowSuperAdminOrAdmin",
   data() {
     return {
       dialog: false,

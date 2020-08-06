@@ -9,6 +9,7 @@ export default {
   name: "Admin-Parent",
   layout: "adminDefault",
   middleware: "isEmailVerifyed"
+  
 };
 </script>
 

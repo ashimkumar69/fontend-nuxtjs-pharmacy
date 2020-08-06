@@ -101,42 +101,48 @@
       <v-divider></v-divider>
 
       <v-list>
-        <template v-for="item in adminDrawerNavs">
-          <v-list-group
-            color="light-blue lighten-2"
-            :key="item.id"
-            :prepend-icon="item.icon"
-            no-action
-            v-if="item.children"
-          >
-            <template v-slot:activator>
-              <v-list-item-content>
-                <v-list-item-title v-text="item.name"></v-list-item-title>
-              </v-list-item-content>
+        <template v-for="(item, i) in adminDrawerNavs">
+          <template v-if="item.children">
+            <template v-if="item.role">
+              <v-list-group
+                color="light-blue lighten-2"
+                :key="i"
+                :prepend-icon="item.icon"
+                no-action
+              >
+                <template v-slot:activator>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="item.name"></v-list-item-title>
+                  </v-list-item-content>
+                </template>
+                <template v-for="(subItem,i) in item.children">
+                  <template v-if="subItem.role">
+                    <v-list-item :key="i" @click.stop="goPage(subItem.to)">
+                      <v-list-item-content>
+                        <v-list-item-title v-text="subItem.name"></v-list-item-title>
+                      </v-list-item-content>
+                      <v-list-item-icon>
+                        <v-icon v-text="subItem.icon"></v-icon>
+                      </v-list-item-icon>
+                    </v-list-item>
+                  </template>
+                </template>
+              </v-list-group>
             </template>
+          </template>
 
-            <v-list-item
-              v-for="subItem in item.children"
-              :key="subItem.id"
-              @click.stop="goPage(subItem.to)"
-            >
-              <v-list-item-content>
-                <v-list-item-title v-text="subItem.name"></v-list-item-title>
-              </v-list-item-content>
-              <v-list-item-icon>
-                <v-icon v-text="subItem.icon"></v-icon>
-              </v-list-item-icon>
-            </v-list-item>
-          </v-list-group>
-
-          <v-list-item v-else :key="item.id" @click.stop="goPage(item.to)">
-            <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.name"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+          <template v-else>
+            <template v-if="item.role">
+              <v-list-item :key="i" @click.stop="goPage(item.to)">
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title v-text="item.name"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </template>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -155,83 +161,163 @@ export default {
       model: null,
       drawer: true,
       adminNavs: [
-        { id: 1, name: "Profile", icon: "fas fa-user", to: "/admin/profile" },
-        { id: 2, name: "Settings", icon: "fas fa-cog", to: "/admin/setting" },
+        { name: "Profile", icon: "fas fa-user", to: "/admin/profile" },
+        { name: "Settings", icon: "fas fa-cog", to: "/admin/setting" },
       ],
       adminDrawerNavs: [
-        { id: 1, name: "Dashboord", icon: "mdi-home-city", to: "/admin" },
         {
-          id: 2,
+          name: "Dashboord",
+          icon: "mdi-home-city",
+          to: "/admin",
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin",
+        },
+        {
+          name: "Dashboord",
+          icon: "mdi-home-city",
+          to: "/admin/userdashbord",
+          role: this.$auth.user.role == "User",
+        },
+        {
           name: "Users",
           icon: "mdi-account-group-outline",
           to: "/admin/user",
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin",
         },
         {
-          id: 3,
           name: "Categories",
           icon: "fas fa-book",
           to: "/admin/categories",
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin",
         },
         {
-          id: 4,
           name: "Products",
           icon: "fas fa-box",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/products" },
             {
-              id: 2,
+              icon: "fas fa-file",
+              name: "Read",
+              to: "/admin/products",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
+            },
+            {
               icon: "fas fa-trash",
               name: "Trash",
               to: "/admin/products/trash",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
             },
           ],
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin",
         },
         {
-          id: 5,
           name: "Blogs",
           icon: "fas fa-blog",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/blogs" },
             {
-              id: 2,
+              icon: "fas fa-file",
+              name: "Read",
+              to: "/admin/blogs",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
+            },
+            {
               icon: "fas fa-trash",
               name: "Trash",
               to: "/admin/blogs/trash",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
             },
           ],
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin",
         },
         {
-          id: 6,
           name: "Contact",
           icon: "fas fa-address-card",
           children: [
-            { id: 1, icon: "fas fa-file", name: "Read", to: "/admin/contacts" },
             {
-              id: 2,
+              icon: "fas fa-file",
+              name: "Read",
+              to: "/admin/contacts",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
+            },
+            {
               icon: "fas fa-trash",
               name: "Trash",
               to: "/admin/contacts/trash",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
             },
           ],
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin",
         },
         {
-          id: 7,
           name: "User Feedback",
           icon: "fas fa-comments",
           children: [
             {
-              id: 1,
               icon: "fas fa-file",
               name: "Give Feedback",
               to: "/admin/userfeedback",
+              role: this.$auth.user.role == "User",
             },
             {
-              id: 2,
               icon: "fas fa-comments",
               name: "All Feedback",
               to: "/admin/userfeedback/allfeedback",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
             },
           ],
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin" ||
+            this.$auth.user.role == "User",
+        },
+        {
+          name: "UI",
+          icon: "fas fa-palette",
+          children: [
+            {
+              icon: "fas fa-file",
+              name: "Banner",
+              to: "/admin/banner",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
+            },
+            {
+              icon: "fas fa-file",
+              name: "Footer",
+              to: "/admin/footer",
+              role:
+                this.$auth.user.role == "Super Admin" ||
+                this.$auth.user.role == "Admin",
+            },
+          ],
+          role:
+            this.$auth.user.role == "Super Admin" ||
+            this.$auth.user.role == "Admin",
         },
       ],
     };

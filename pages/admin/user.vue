@@ -7,6 +7,7 @@
 <script>
 export default {
   name: "User-Parent",
+  middleware: "allowSuperAdminOrAdmin",
 };
 </script>
 
