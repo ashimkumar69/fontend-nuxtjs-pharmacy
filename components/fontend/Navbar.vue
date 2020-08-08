@@ -3,14 +3,8 @@
     <v-app-bar app>
       <v-container class="d-flex align-center">
         <a @click.stop="goIndexPage" class="d-flex align-center text-decoration-none">
-          <v-img
-            alt="Logo"
-            class="mr-2"
-            src="/images/favicon/favicon.webp"
-            width="30px"
-            height="30px"
-          />
-          <span class="black--text">Pharmacy</span>
+          <v-img alt="Logo" class="mr-2" :src="footer.logo" width="30px" height="30px" />
+          <span class="black--text">{{ footer.name }}</span>
         </a>
 
         <v-spacer></v-spacer>
@@ -151,7 +145,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ user: "user/getUser" }),
+    ...mapGetters({ user: "user/getUser", footer: "footer/getFooter" }),
   },
   methods: {
     goIndexPage() {

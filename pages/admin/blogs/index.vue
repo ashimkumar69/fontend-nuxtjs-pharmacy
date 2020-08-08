@@ -274,11 +274,10 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
       this.itemId = item.id;
+      this.editedItem.picture = null;
     },
 
     deleteItem(item) {
-      // const index = this.blogs.indexOf(item);
-
       this.$toast.error("Are you sure you want to delete this item?", {
         action: [
           {
@@ -288,7 +287,7 @@ export default {
                 .$delete(`/blog/${item.id}`)
                 .then((res) => {
                   this.$store.dispatch("blogs/setBlogs", res.data);
-
+                  this.$store.dispatch("fontendBlogs/fetchBlogs");
                   toastObject.goAway(0);
                   this.$toast.success("Successfully blog Deleted", {
                     duration: 5000,
@@ -349,6 +348,7 @@ export default {
           .$post(`/blog/${this.itemId}`, form)
           .then((res) => {
             this.$store.dispatch("blogs/setBlogs", res.data);
+            this.$store.dispatch("fontendBlogs/fetchBlogs");
             this.$toast.success("Successfully Blog Updated", {
               duration: 5000,
               action: {
@@ -386,6 +386,7 @@ export default {
           .then((res) => {
             this.$refs.form.reset();
             this.$store.dispatch("blogs/setBlogs", res.data);
+            this.$store.dispatch("fontendBlogs/fetchBlogs");
 
             this.$toast.success("Successfully Blog Created", {
               duration: 5000,

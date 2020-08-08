@@ -12,6 +12,15 @@ export const actions = {
         dispatch("products/setProducts", products.data);
         dispatch("blogs/setBlogs", blogs.data);
       }
+      const banners = await this.$axios.$get("/bannerIndex");
+      const footer = await this.$axios.$get("/footerIndex");
+      const products = await this.$axios.$get("/productIndex");
+      const blogs = await this.$axios.$get("/blogIndex");
+
+      dispatch("banners/setBanners", banners.data);
+      dispatch("footer/setFooter", footer.data);
+      dispatch("products/setProducts", products.data);
+      dispatch("fontendBlogs/setBlogs", blogs.data);
     } catch (error) {}
   }
 };

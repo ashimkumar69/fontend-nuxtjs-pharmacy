@@ -222,10 +222,11 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Footer",
+  middleware: "allowSuperAdminOrAdmin",
   data() {
     return {
       dialog: false,
-      footer: {},
+
       editedIndex: -1,
       editedItem: {
         logo: null,
@@ -270,22 +271,18 @@ export default {
       ],
     };
   },
-  async asyncData({ store, $axios }) {
+  async fetch({ store, $axios }) {
     try {
       const footer = await $axios.$get("/footer");
-
-      return {
-        footer: footer.data,
-      };
+      store.dispatch("footer/setFooter", footer.data);
     } catch (error) {
       console.log(error);
     }
   },
   computed: {
-    // ...mapGetters({
-    //   categories: "categories/getCategories",
-    //   products: "products/getProducts",
-    // }),
+    ...mapGetters({
+      footer: "footer/getFooter",
+    }),
     formTitle() {
       return this.editedIndex === -1 ? "New Footer" : "Edit Footer";
     },
@@ -347,7 +344,7 @@ export default {
 
     close() {
       this.$store.dispatch("serverValidationErrors/clearErrors");
-      // this.$refs.form.reset();
+      this.$refs.form.reset();
       this.dialog = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
@@ -393,8 +390,7 @@ export default {
         this.$axios
           .$post(`/footer/${this.itemId}`, form)
           .then((res) => {
-            this.footer = res.data;
-            // this.$store.dispatch("products/setProducts", res.data);
+            this.$store.dispatch("footer/setFooter", res.data);
             this.$toast.success("Successfully Footer Updated", {
               duration: 5000,
               action: {
@@ -455,11 +451,8 @@ export default {
                 },
               });
             } else {
-              this.footer = res.data;
+              this.$store.dispatch("footer/setFooter", res.data);
 
-              // this.$refs.form.reset();
-              // this.$store.dispatch("products/setProducts", res.data);
-              // this.$store.dispatch("categories/fetchCategories");
               this.$toast.success("Successfully Footer Created", {
                 duration: 5000,
                 action: {
@@ -475,7 +468,6 @@ export default {
             console.log(error);
           });
       }
-      // this.close();
     },
 
     getFile(e) {

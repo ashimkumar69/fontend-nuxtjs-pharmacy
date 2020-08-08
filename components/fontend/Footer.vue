@@ -8,27 +8,49 @@
               <v-list>
                 <v-list-item class="d-flex justify-center justify-lg-start">
                   <v-list-item-icon>
-                    <v-img src="/images/favicon/favicon.webp" width="30px"></v-img>
-                    <span class="ml-2 black--text">Pharmacy</span>
+                    <v-img :src="footer.logo" width="30px"></v-img>
+                    <span class="ml-2 black--text">{{ footer.name }}</span>
                   </v-list-item-icon>
                 </v-list-item>
               </v-list>
 
-              <v-card-text
-                class="px-0 pt-0"
-              >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi, cupiditate iste. Architecto ad, est saepe a eveniet eius ex. Minus eveniet aliquid culpa, ducimus id voluptate eaque aperiam quas facilis.</v-card-text>
+              <v-card-text class="px-0 pt-0" v-html="footer.description"></v-card-text>
               <v-card-title class="px-0 d-flex justify-center justify-lg-start">Follow Us</v-card-title>
               <v-card-text class="px-0">
                 <v-btn
-                  v-for="icon in icons"
-                  :key="icon.id"
+                  tag="a"
+                  target="_blank"
                   class="mr-2"
+                  :href="footer.f_link"
                   fab
                   small
                   color="light-blue lighten-2"
                   dark
                 >
-                  <v-icon small>{{ icon.icon }}</v-icon>
+                  <v-icon small>fab fa-facebook-f</v-icon>
+                </v-btn>
+                <v-btn
+                  tag="a"
+                  target="_blank"
+                  class="mr-2"
+                  :href="footer.t_link"
+                  fab
+                  small
+                  color="light-blue lighten-2"
+                  dark
+                >
+                  <v-icon small>mdi-twitter</v-icon>
+                </v-btn>
+                <v-btn
+                  tag="a"
+                  target="_blank"
+                  :href="footer.y_link"
+                  fab
+                  small
+                  color="light-blue lighten-2"
+                  dark
+                >
+                  <v-icon small>mdi-youtube</v-icon>
                 </v-btn>
               </v-card-text>
             </v-card>
@@ -42,8 +64,7 @@
                     <v-icon color="light-blue lighten-2">mdi-phone</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-subtitle>019773733747</v-list-item-subtitle>
-                    <v-list-item-subtitle>019773733747</v-list-item-subtitle>
+                    <v-list-item-subtitle>{{ footer.phone }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -51,7 +72,7 @@
                     <v-icon color="light-blue lighten-2">mdi-clock</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-subtitle>Hotline Hours: 10 AM - 10 PM</v-list-item-subtitle>
+                    <v-list-item-subtitle>Hotline Hours: {{ footer.houre }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -59,7 +80,7 @@
                     <v-icon color="light-blue lighten-2">mdi-email</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-subtitle>example@example.com</v-list-item-subtitle>
+                    <v-list-item-subtitle>{{ footer.email }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -67,12 +88,7 @@
                     <v-icon color="light-blue lighten-2">fas fa-map-marker-alt</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-card-text class="pt-0 px-0 text--secondary">
-                      #50 Road 9/A
-                      (Next to Meena Bazaar)
-                      Dhanmondi, Dhaka 1209
-                      Open 9 AM - 11 PM
-                    </v-card-text>
+                    <v-card-text class="pt-0 px-0 text--secondary" v-html="footer.address"></v-card-text>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -117,32 +133,36 @@
       <v-card-text>
         Copyright &copy; {{ new Date().getFullYear() }} —
         Powered by
-        <strong>Pharmacy</strong>
+        <strong>{{ footer.name }}</strong>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
       icons: [
         { id: 1, icon: "fab fa-facebook-f" },
         { id: 2, icon: "mdi-twitter" },
-        { id: 3, icon: "mdi-youtube" }
+        { id: 3, icon: "mdi-youtube" },
       ],
       form: {
-        email: null
-      }
+        email: null,
+      },
     };
+  },
+  computed: {
+    ...mapGetters({ footer: "footer/getFooter" }),
   },
   methods: {
     submit() {
       this.$refs.observer.validate();
       this.$refs.observer.reset();
       this.$refs.form.reset();
-    }
-  }
+    },
+  },
 };
 </script>

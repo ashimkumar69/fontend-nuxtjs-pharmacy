@@ -272,7 +272,7 @@ export default {
         },
         { text: "", value: "data-table-expand" },
       ],
-      // products: [],
+
       editedIndex: -1,
       editedItem: {
         category_id: null,
@@ -303,7 +303,6 @@ export default {
         mrp: null,
       },
       itemId: null,
-      // categories: null,
     };
   },
   computed: {
@@ -329,6 +328,7 @@ export default {
       this.dialog = true;
       this.itemId = item.id;
       this.editedItem.category_id = null;
+      this.editedItem.picture = null;
     },
 
     deleteItem(item) {
@@ -479,6 +479,7 @@ export default {
         this.$axios
           .$post("/product", form)
           .then((res) => {
+            this.editedItem.picture = null;
             this.$refs.form.reset();
             this.$store.dispatch("products/setProducts", res.data);
             this.$store.dispatch("categories/fetchCategories");
@@ -496,7 +497,6 @@ export default {
             console.log(error);
           });
       }
-      // this.close();
     },
 
     getFile(e) {

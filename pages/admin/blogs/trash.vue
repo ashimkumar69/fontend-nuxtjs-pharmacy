@@ -161,6 +161,7 @@ export default {
         this.$axios.$post("/blogRestore", { id: id }).then((res) => {
           this.blogs = res.data;
           this.$store.dispatch("blogs/fetchBlogs");
+          this.$store.dispatch("fontendBlogs/fetchBlogs");
           this.$toast.success("Successfully Blog Restore", {
             duration: 5000,
             action: {

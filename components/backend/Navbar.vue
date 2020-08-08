@@ -2,8 +2,11 @@
   <div>
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title role="button" @click="goIndexPage">Pharmacy</v-toolbar-title>
+      <a @click.stop="goIndexPage" class="d-flex align-center text-decoration-none">
+        <v-img alt="Logo" class="mr-2" :src="footer.logo" width="30px" height="30px" />
+        <span class="black--text">{{ footer.name }}</span>
+      </a>
+      <!-- <v-toolbar-title role="button" @click="goIndexPage">Pharmacy</v-toolbar-title> -->
 
       <v-spacer></v-spacer>
       <v-btn class="mr-2" icon>
@@ -301,7 +304,7 @@ export default {
             {
               icon: "fas fa-file",
               name: "Banner",
-              to: "/admin/banner",
+              to: "/admin/banners",
               role:
                 this.$auth.user.role == "Super Admin" ||
                 this.$auth.user.role == "Admin",
@@ -323,7 +326,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ user: "user/getUser" }),
+    ...mapGetters({ user: "user/getUser", footer: "footer/getFooter" }),
   },
   methods: {
     goPage(to) {

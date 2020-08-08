@@ -97,6 +97,7 @@
 
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Banner",
   middleware: "allowSuperAdminOrAdmin",
@@ -118,7 +119,7 @@ export default {
           filterable: false,
         },
       ],
-      banners: [],
+
       editedIndex: -1,
       editedItem: {
         picture: [],
@@ -129,18 +130,17 @@ export default {
       itemId: null,
     };
   },
-  async asyncData({ store, $axios }) {
+  async fetch({ store, $axios }) {
     try {
       const banners = await $axios.$get("/banner");
 
-      return {
-        banners: banners.data,
-      };
+      store.dispatch("banners/setBanners", banners.data);
     } catch (error) {
       console.log(error);
     }
   },
   computed: {
+    ...mapGetters({ banners: "banners/getBanners" }),
     formTitle() {
       return this.editedIndex === -1 ? "New Banner" : "Edit Banner";
     },
@@ -155,15 +155,12 @@ export default {
   methods: {
     editItem(item) {
       this.editedIndex = this.banners.indexOf(item);
-      // this.editedItem = Object.assign({}, item);
       this.itemId = item.id;
       this.editedItem.picture = [];
       this.dialog = true;
     },
 
     deleteItem(item) {
-      // const index = this.banners.indexOf(item);
-      // this.itemId = item.id;
       this.$toast.error("Are you sure you want to delete this item?", {
         action: [
           {
@@ -172,9 +169,9 @@ export default {
               this.$axios
                 .$delete(`/banner/${item.id}`)
                 .then((res) => {
-                  this.banners = res.data;
+                  this.$store.dispatch("banners/setBanners", res.data);
                   toastObject.goAway(0);
-                  this.$toast.success("Successfully Category Deleted", {
+                  this.$toast.success("Successfully Banner Deleted", {
                     duration: 5000,
                     action: {
                       text: "Cancel",
@@ -219,9 +216,9 @@ export default {
         this.$axios
           .$post(`/banner/${this.itemId}`, form)
           .then((res) => {
-            this.banners = res.data;
-            // this.$refs.form.reset();
-            // this.$store.dispatch("categories/setCategories", res.data);
+            this.$refs.form.reset();
+            this.editedItem.picture = [];
+            this.$store.dispatch("banners/setBanners", res.data);
 
             this.$toast.success("Successfully Banner Updated", {
               duration: 5000,
@@ -246,9 +243,9 @@ export default {
         this.$axios
           .$post("/banner", form)
           .then((res) => {
-            this.banners = res.data;
             this.$refs.form.reset();
-            // this.$store.dispatch("categories/setCategories", res.data);
+            this.editedItem.picture = null;
+            this.$store.dispatch("banners/setBanners", res.data);
 
             this.$toast.success("Successfully Banner Created", {
               duration: 5000,
@@ -264,7 +261,6 @@ export default {
             console.log(error);
           });
       }
-      // this.close();
     },
     getFile(e) {
       if (this.editedIndex > -1) {
