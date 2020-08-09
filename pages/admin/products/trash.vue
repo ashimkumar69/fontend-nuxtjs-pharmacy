@@ -204,6 +204,7 @@ export default {
         this.$axios.$post("/productrestore", { id: id }).then((res) => {
           this.products = res.data;
           this.$store.dispatch("products/fetchProducts");
+          this.$store.dispatch("fontendAllProducts/fetchProducts");
           this.$toast.success("Successfully Product Restore", {
             duration: 5000,
             action: {

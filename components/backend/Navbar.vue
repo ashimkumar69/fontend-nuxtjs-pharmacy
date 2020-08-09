@@ -9,39 +9,40 @@
       <!-- <v-toolbar-title role="button" @click="goIndexPage">Pharmacy</v-toolbar-title> -->
 
       <v-spacer></v-spacer>
-      <v-btn class="mr-2" icon>
-        <v-badge color="light-blue lighten-2" content="6" overlap>
-          <v-icon>fas fa-user</v-icon>
-        </v-badge>
-      </v-btn>
-      <v-menu offset-y transition="slide-x-transition">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on" icon>
-            <v-badge color="light-blue lighten-2" content="6" overlap>
-              <v-icon>fas fa-bell</v-icon>
-            </v-badge>
-          </v-btn>
-        </template>
+      <template v-if="$auth.user.role == 'Super Admin' || $auth.user.role == 'Admin'">
+        <v-btn class="mr-2" icon>
+          <v-badge color="light-blue lighten-2" content="6" overlap>
+            <v-icon>fas fa-user</v-icon>
+          </v-badge>
+        </v-btn>
+        <v-menu offset-y transition="slide-x-transition">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn v-bind="attrs" v-on="on" icon>
+              <v-badge color="light-blue lighten-2" content="6" overlap>
+                <v-icon>fas fa-bell</v-icon>
+              </v-badge>
+            </v-btn>
+          </template>
 
-        <v-card>
-          <v-card-title class="d-flex justify-center">Notification</v-card-title>
+          <v-card>
+            <v-card-title class="d-flex justify-center">Notification</v-card-title>
 
-          <v-divider></v-divider>
-          <v-list>
-            <v-list-item>
-              <v-list-item-avatar size="40">
-                <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
-              </v-list-item-avatar>
+            <v-divider></v-divider>
+            <v-list>
+              <v-list-item>
+                <v-list-item-avatar size="40">
+                  <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
+                </v-list-item-avatar>
 
-              <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
-                <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card>
-      </v-menu>
-
+                <v-list-item-content>
+                  <v-list-item-title>John Leider</v-list-item-title>
+                  <v-list-item-subtitle>Founder of Vuetify.js</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-menu>
+      </template>
       <!-- 
         
        nav avator

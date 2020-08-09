@@ -178,7 +178,7 @@
 
                       <v-list-item>
                         <v-list-item-content>
-                          <v-list-item-title>Category: {{item.category_id}}</v-list-item-title>
+                          <v-list-item-title>Category: {{item.category}}</v-list-item-title>
                         </v-list-item-content>
                       </v-list-item>
                       <v-list-item>
@@ -260,7 +260,7 @@ export default {
           align: "start",
           value: "name",
         },
-        { text: "Category", value: "category_id", filterable: false },
+        { text: "Category", value: "category", filterable: false },
         { text: "Price", value: "mrp", filterable: false },
         { text: "Generic", value: "generic" },
         { text: "Manufactured", value: "manufactured", filterable: false },
@@ -344,6 +344,7 @@ export default {
                 .then((res) => {
                   this.$store.dispatch("products/setProducts", res.data);
                   this.$store.dispatch("categories/fetchCategories");
+                  this.$store.dispatch("fontendAllProducts/fetchProducts");
                   toastObject.goAway(0);
                   this.$toast.success("Successfully Product Deleted", {
                     duration: 5000,
@@ -424,6 +425,7 @@ export default {
           .$post(`/product/${this.itemId}`, form)
           .then((res) => {
             this.$store.dispatch("products/setProducts", res.data);
+            this.$store.dispatch("fontendAllProducts/fetchProducts");
             this.$toast.success("Successfully Product Updated", {
               duration: 5000,
               action: {
@@ -483,6 +485,7 @@ export default {
             this.$refs.form.reset();
             this.$store.dispatch("products/setProducts", res.data);
             this.$store.dispatch("categories/fetchCategories");
+            this.$store.dispatch("fontendAllProducts/fetchProducts");
             this.$toast.success("Successfully Product Created", {
               duration: 5000,
               action: {
