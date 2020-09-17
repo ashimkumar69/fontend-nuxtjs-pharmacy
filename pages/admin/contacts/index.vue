@@ -7,7 +7,6 @@
             :search="search"
             :headers="headers"
             :items="contacts"
-            sort-by="name"
             class="elevation-1"
             show-expand
           >

@@ -10,15 +10,36 @@
 
       <v-spacer></v-spacer>
       <template v-if="$auth.user.role == 'Super Admin' || $auth.user.role == 'Admin'">
-        <v-btn class="mr-2" icon>
+        <!-- <v-btn class="mr-2" icon>
           <v-badge color="light-blue lighten-2" content="6" overlap>
             <v-icon>fas fa-user</v-icon>
           </v-badge>
+        </v-btn>-->
+
+        <v-btn icon to="/admin/notification">
+          <v-badge
+            v-if="user.notificationCount > 0"
+            color="light-blue lighten-2"
+            :content="user.notificationCount"
+            overlap
+          >
+            <v-icon>fas fa-bell</v-icon>
+          </v-badge>
+
+          <v-icon v-else>fas fa-bell</v-icon>
         </v-btn>
-        <v-menu offset-y transition="slide-x-transition">
+        <!-- <v-menu offset-y transition="slide-x-transition">
           <template v-slot:activator="{ on, attrs }">
             <v-btn v-bind="attrs" v-on="on" icon>
-              <v-badge color="light-blue lighten-2" content="6" overlap>
+              <v-badge
+                v-if="notificationCount > 0"
+                color="red lighten-2"
+                :content="notificationCount"
+                overlap
+              >
+                <v-icon>fas fa-bell</v-icon>
+              </v-badge>
+              <v-badge v-else color="light-blue lighten-2" content="0" overlap>
                 <v-icon>fas fa-bell</v-icon>
               </v-badge>
             </v-btn>
@@ -41,7 +62,7 @@
               </v-list-item>
             </v-list>
           </v-card>
-        </v-menu>
+        </v-menu>-->
       </template>
       <!-- 
         

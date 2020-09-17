@@ -152,7 +152,6 @@ export default {
       this.$axios
         .$post("/contact", form)
         .then((res) => {
-         
           // this.$store.dispatch("contacts/setContacts", res.data);
           this.$refs.form.reset();
           this.$refs.observer.reset();

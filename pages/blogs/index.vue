@@ -39,33 +39,32 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Blogs-Child",
-  data() {
-    return {
-      page: 1,
-      meta: {},
-    };
+  // data() {
+  //   return {
+  //     page: 1,
+  //   };
+  // },
+  async fetch({ store, $axios }) {
+    const blogs = await $axios.$get("/blogIndex");
+    store.dispatch("fontendBlogs/setBlogs", blogs.data);
+    store.dispatch("fontendBlogs/setMeta", blogs.meta);
   },
   computed: {
     ...mapGetters({
       blogs: "fontendBlogs/getBlogs",
+      meta: "fontendBlogs/getMeta",
     }),
   },
-  created() {
-    this.fetchBlogs();
-  },
+
   methods: {
-    fetchBlogs(page) {
-      let url = page ? `/blogIndex?page=${page}` : "/blogIndex";
+    changePage(page) {
       this.$axios
-        .$get(url)
+        .$get(`/blogIndex?page=${page}`)
         .then((res) => {
           this.$store.dispatch("fontendBlogs/setBlogs", res.data);
-          this.meta = res.meta;
+          this.$store.dispatch("fontendBlogs/setMeta", blogs.meta);
         })
         .catch((errors) => console.log(errors));
-    },
-    changePage(page) {
-      this.fetchBlogs(page);
     },
   },
 };
