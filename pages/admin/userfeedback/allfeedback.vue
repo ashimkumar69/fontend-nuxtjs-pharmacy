@@ -7,7 +7,6 @@
             :search="search"
             :headers="headers"
             :items="userfeedback"
-            sort-by="name"
             class="elevation-1"
             show-expand
           >
@@ -124,7 +123,18 @@ export default {
           align: "start",
           value: "name",
         },
-        { text: "Published", value: "published", filterable: false },
+        {
+          text: "Created At",
+          value: "created_at",
+
+          filterable: false,
+        },
+        {
+          text: "Published",
+          value: "published",
+          sortable: false,
+          filterable: false,
+        },
         {
           text: "Actions",
           value: "actions",
@@ -163,7 +173,7 @@ export default {
       this.$axios
         .$post("/approveOrNot", { id: item.id })
         .then((res) => {
-          // this.$store.dispatch("categories/setCategories", res.data);
+          this.$store.dispatch("feedback/fetchFeedbacks");
           this.userfeedback = res.data;
           this.$toast.success("Successfully Approved Feedback", {
             duration: 5000,
@@ -190,6 +200,7 @@ export default {
               this.$axios
                 .$post("/delete", { id: item.id })
                 .then((res) => {
+                  this.$store.dispatch("feedback/fetchFeedbacks");
                   this.userfeedback = res.data;
                   toastObject.goAway(0);
                   this.$toast.success("Successfully Feedback Deleted", {

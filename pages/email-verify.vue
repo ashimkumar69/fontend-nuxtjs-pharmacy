@@ -8,7 +8,7 @@
 
             <v-card-actions class="d-flex justify-center">
               <v-btn
-                @click.prevent="semVerifyMail"
+                @click="VerifyMail"
                 depressed
                 dark
                 color="light-blue lighten-2"
@@ -26,25 +26,27 @@
 export default {
   name: "Email-Verify",
   layout: "emailverifylayout",
-
+  created() {
+    this.$store.dispatch("user/fetchUser");
+  },
   methods: {
-    async semVerifyMail() {
+    async VerifyMail() {
       try {
-        await this.$axios.$get("/auth/email/resend").then(res => {
+        await this.$axios.$get("/auth/email/resend").then((res) => {
           this.$toast.success(res.message, {
             action: {
               text: "Cancel",
               onClick: (e, toastObject) => {
                 toastObject.goAway(0);
-              }
-            }
+              },
+            },
           });
         });
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

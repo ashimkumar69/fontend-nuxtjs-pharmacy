@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="12" v-if="productMedicine.length > 0">
           <v-sheet color="transparent" class="d-flex py-3">
             <v-icon small color="light-blue lighten-2" class="mr-2">fas fa-file-medical</v-icon>
             <div class="font-weight-bold text-h6">Medicine</div>
@@ -26,7 +26,12 @@
               >
                 <v-icon small>fas fa-chevron-right</v-icon>
               </v-btn>
-              <v-btn color="light-blue lighten-2" class="text-capitalize" outlined>See All</v-btn>
+              <v-btn
+                color="light-blue lighten-2"
+                class="text-capitalize"
+                to="/products"
+                outlined
+              >See All</v-btn>
             </v-sheet>
             <v-sheet color="transparent" class="hidden-sm-and-up">
               <v-btn

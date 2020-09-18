@@ -55,7 +55,10 @@ export default {
   async asyncData({ store, $axios }) {
     try {
       const totalDetailsIndex = await $axios.$get("/totalDetailsIndex");
-
+      store.dispatch("user/fetchUser");
+      store.dispatch("categories/fetchCategories");
+      store.dispatch("products/fetchProducts");
+      store.dispatch("blogs/fetchBlogs");
       return {
         totalDetailsIndex: totalDetailsIndex,
       };

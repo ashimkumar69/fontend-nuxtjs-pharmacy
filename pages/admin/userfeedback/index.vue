@@ -3,34 +3,12 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12">
-          <v-data-table
-            :search="search"
-            :headers="headers"
-            :items="userfeedback"
-            sort-by="name"
-            class="elevation-1"
-            show-expand
-          >
+          <v-data-table :headers="headers" :items="userfeedback" class="elevation-1" show-expand>
             <template v-slot:top>
               <v-toolbar flat color="white">
                 <v-toolbar-title>User Feedback</v-toolbar-title>
 
                 <v-spacer></v-spacer>
-                <v-col cols="4">
-                  <v-text-field
-                    v-model="search"
-                    color="light-blue lighten-2"
-                    append-icon="mdi-magnify"
-                    outlined
-                    dense
-                    clear-icon="mdi-close-circle"
-                    clearable
-                    label="Search by Name"
-                    type="text"
-                    class="mr-2"
-                    hide-details
-                  ></v-text-field>
-                </v-col>
 
                 <v-dialog v-model="dialog" max-width="500px">
                   <template v-slot:activator="{ on, attrs }">
@@ -168,19 +146,24 @@ export default {
   data() {
     return {
       dialog: false,
-      search: "",
+
       headers: [
         {
           text: "Name",
           align: "start",
           value: "name",
+          sortable: false,
         },
-        { text: "Published", value: "published", filterable: false },
+        {
+          text: "Created At",
+          value: "created_at",
+          sortable: false,
+        },
+        { text: "Published", value: "published", sortable: false },
         {
           text: "Actions",
           value: "actions",
           sortable: false,
-          filterable: false,
         },
         { text: "", value: "data-table-expand" },
       ],

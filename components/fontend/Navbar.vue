@@ -3,8 +3,15 @@
     <v-app-bar app>
       <v-container class="d-flex align-center">
         <a @click.stop="goIndexPage" class="d-flex align-center text-decoration-none">
-          <v-img alt="Logo" class="mr-2" :src="footer.logo" width="30px" height="30px" />
-          <span class="black--text">{{ footer.name }}</span>
+          <v-img
+            v-if="footer.logo"
+            alt="Logo"
+            class="mr-2"
+            :src="footer.logo"
+            width="30px"
+            height="30px"
+          />
+          <span v-if="footer.name" class="black--text">{{ footer.name }}</span>
         </a>
 
         <v-spacer></v-spacer>

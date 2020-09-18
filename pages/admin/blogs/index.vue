@@ -253,6 +253,7 @@ export default {
       ],
     };
   },
+
   computed: {
     ...mapGetters({
       blogs: "blogs/getBlogs",

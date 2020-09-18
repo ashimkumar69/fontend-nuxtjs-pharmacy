@@ -20,6 +20,9 @@
 export default {
   name: "UserDashbord",
   middleware: "allowUser",
+  created() {
+    this.$store.dispatch("user/fetchUser");
+  },
 };
 </script>
 
