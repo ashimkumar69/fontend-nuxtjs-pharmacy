@@ -7,7 +7,6 @@
             :search="search"
             :headers="headers"
             :items="blogs"
-            sort-by="title"
             class="elevation-1"
             show-expand
           >

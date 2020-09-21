@@ -7,7 +7,6 @@
             :search="search"
             :headers="headers"
             :items="users"
-            sort-by="name"
             class="elevation-1"
             show-expand
           >
@@ -96,7 +95,7 @@
 <script>
 export default {
   name: "User-Chield",
- 
+
   data() {
     return {
       search: "",
@@ -106,8 +105,14 @@ export default {
           align: "start",
           value: "name",
         },
-        { text: "Email", value: "email", filterable: false },
-        { text: "Phone", value: "phone", filterable: false },
+        { text: "Email", value: "email", sortable: false, filterable: false },
+        { text: "Phone", value: "phone", sortable: false, filterable: false },
+        {
+          text: "Created At",
+          value: "created_at",
+
+          filterable: false,
+        },
         {
           text: "Actions",
           value: "actions",

@@ -106,6 +106,12 @@ export default {
           value: "name",
         },
         { text: "Subject", value: "subject" },
+        {
+          text: "Created At",
+          value: "created_at",
+
+          filterable: false,
+        },
 
         {
           text: "Actions",

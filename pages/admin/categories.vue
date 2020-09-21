@@ -3,13 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12">
-          <v-data-table
-            :search="search"
-            :headers="headers"
-            :items="categories"
-            sort-by="name"
-            class="elevation-1"
-          >
+          <v-data-table :search="search" :headers="headers" :items="categories" class="elevation-1">
             <template v-slot:top>
               <v-toolbar flat color="white">
                 <v-toolbar-title>Categories</v-toolbar-title>

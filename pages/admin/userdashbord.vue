@@ -4,11 +4,7 @@
       <v-row>
         <v-col cols="12">
           <v-card color="light-blue lighten-2">
-            <v-card-title class="white--text">User Dashbord</v-card-title>
-
-            <v-card-actions>
-              <v-btn text class="white--text">See User</v-btn>
-            </v-card-actions>
+            <v-card-title class="white--text">Welcome {{user.name}}</v-card-title>
           </v-card>
         </v-col>
       </v-row>
@@ -17,11 +13,17 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "UserDashbord",
   middleware: "allowUser",
   created() {
     this.$store.dispatch("user/fetchUser");
+  },
+  computed: {
+    ...mapGetters({
+      user: "user/getUser",
+    }),
   },
 };
 </script>

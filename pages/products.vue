@@ -99,7 +99,7 @@
                     <tr>
                       <td>Name: {{ product.name }}</td>
                     </tr>
-                    <tr v-if="product.oldMrp">
+                    <tr v-if="product.old_mrp">
                       <td class="text-decoration-line-through">MRP: {{ product.old_mrp }}</td>
                     </tr>
                     <tr v-else>

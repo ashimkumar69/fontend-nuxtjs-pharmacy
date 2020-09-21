@@ -3,13 +3,7 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12">
-          <v-data-table
-            :search="search"
-            :headers="headers"
-            :items="banners"
-            sort-by="name"
-            class="elevation-1"
-          >
+          <v-data-table :headers="headers" :items="banners" class="elevation-1">
             <template v-slot:top>
               <v-toolbar flat color="white">
                 <v-toolbar-title>Banners</v-toolbar-title>
@@ -110,6 +104,12 @@ export default {
           text: "Picture",
           align: "start",
           value: "picture",
+        },
+        {
+          text: "Created At",
+          value: "created_at",
+
+          filterable: false,
         },
 
         {

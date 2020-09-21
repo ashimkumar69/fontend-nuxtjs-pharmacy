@@ -7,7 +7,6 @@
             :search="search"
             :headers="headers"
             :items="products"
-            sort-by="name"
             class="elevation-1"
             show-expand
           >
@@ -25,7 +24,7 @@
                     dense
                     clear-icon="mdi-close-circle"
                     clearable
-                    label="Search by Products and Generic"
+                    label="Search by Products, Generic and Manufactured"
                     type="text"
                     class="mr-2"
                     hide-details
@@ -263,7 +262,7 @@ export default {
         { text: "Category", value: "category", filterable: false },
         { text: "Price", value: "mrp", filterable: false },
         { text: "Generic", value: "generic" },
-        { text: "Manufactured", value: "manufactured", filterable: false },
+        { text: "Manufactured", value: "manufactured" },
         {
           text: "Actions",
           value: "actions",

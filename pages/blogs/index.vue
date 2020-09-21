@@ -6,8 +6,8 @@
           <v-card>
             <v-img height="250px" :src="item.picture"></v-img>
             <v-card-subtitle class="pb-0">{{ item.published_at }}</v-card-subtitle>
-            <v-card-title class="pt-0 pb-0">{{ item.title | str_limit(52)}}</v-card-title>
-            <v-card-text class="pb-0" v-html="item.body"></v-card-text>
+            <v-card-title class="pt-0 height">{{ item.title | str_limit(110)}}</v-card-title>
+
             <v-card-actions>
               <v-btn
                 outlined
@@ -39,21 +39,19 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Blogs-Child",
-  // data() {
-  //   return {
-  //     page: 1,
-  //   };
-  // },
-  async fetch({ store, $axios }) {
-    const blogs = await $axios.$get("/blogIndex");
-    store.dispatch("fontendBlogs/setBlogs", blogs.data);
-    store.dispatch("fontendBlogs/setMeta", blogs.meta);
+  data() {
+    return {
+      blogs: [],
+      meta: {},
+    };
   },
-  computed: {
-    ...mapGetters({
-      blogs: "fontendBlogs/getBlogs",
-      meta: "fontendBlogs/getMeta",
-    }),
+  async asyncData({ store, $axios }) {
+    const blogs = await $axios.$get("/blogIndex");
+
+    return {
+      blogs: blogs.data,
+      meta: blogs.meta,
+    };
   },
 
   methods: {
@@ -61,8 +59,8 @@ export default {
       this.$axios
         .$get(`/blogIndex?page=${page}`)
         .then((res) => {
-          this.$store.dispatch("fontendBlogs/setBlogs", res.data);
-          this.$store.dispatch("fontendBlogs/setMeta", blogs.meta);
+          this.blogs = res.data;
+          this.meta = res.meta;
         })
         .catch((errors) => console.log(errors));
     },
@@ -70,5 +68,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.height {
+  height: 60px;
+}
 </style>

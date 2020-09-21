@@ -22,7 +22,6 @@ export const actions = {
       const banners = await this.$axios.$get("/bannerIndex");
       const footer = await this.$axios.$get("/footerIndex");
       const products = await this.$axios.$get("/productIndex");
-      // const blogs = await this.$axios.$get("/blogIndex");
       const allProducts = await this.$axios.$get("/allProductIndex");
       const categories = await this.$axios.$get("/categoryIndex");
       const userFeedback = await this.$axios.$get("/userFeedbackIndex");
@@ -30,7 +29,6 @@ export const actions = {
       dispatch("banners/setBanners", banners.data);
       dispatch("footer/setFooter", footer.data);
       dispatch("products/setProducts", products.data);
-      // dispatch("fontendBlogs/setBlogs", blogs.data);
       dispatch("fontendAllProducts/setProducts", allProducts.data);
       dispatch("fontendCategories/setCategories", categories.data);
       dispatch("feedback/setFeedbacks", userFeedback.data);

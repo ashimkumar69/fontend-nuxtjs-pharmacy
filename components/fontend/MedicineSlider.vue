@@ -70,7 +70,7 @@
                   class="font-weight-bold text-subtitle-2 pb-0 pt-0"
                 >{{ item.name | str_limit(34) }}</v-card-title>
                 <v-card-title
-                  v-if="item.oldMrp"
+                  v-if="item.old_mrp"
                   class="font-weight-bold text-subtitle-2 text-decoration-line-through pt-0 pb-0"
                 >MRP: {{ item.old_mrp }}</v-card-title>
                 <v-card-title
@@ -106,7 +106,7 @@
                       <tr>
                         <td>Name: {{ product.name }}</td>
                       </tr>
-                      <tr v-if="product.oldMrp">
+                      <tr v-if="product.old_mrp">
                         <td class="text-decoration-line-through">MRP: {{ product.old_mrp }}</td>
                       </tr>
                       <tr v-else>

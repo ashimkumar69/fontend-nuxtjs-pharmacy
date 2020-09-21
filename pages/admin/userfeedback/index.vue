@@ -264,7 +264,6 @@ export default {
             .$patch(`/userfeedback/${this.itemId}`, this.editedItem)
             .then((res) => {
               this.userfeedback = res.data;
-              // this.$store.dispatch("categories/setCategories", res.data);
 
               this.$toast.success("Successfully Feedback Updated", {
                 duration: 5000,

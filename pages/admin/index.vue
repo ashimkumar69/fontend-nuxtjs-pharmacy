@@ -7,7 +7,7 @@
             <v-card-title class="white--text">Total User</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.User }}</v-card-subtitle>
             <v-card-actions>
-              <v-btn text class="white--text">See User</v-btn>
+              <v-btn text class="white--text" to="/admin/user">See User</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -16,7 +16,7 @@
             <v-card-title class="white--text">Total Product</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.Product }}</v-card-subtitle>
             <v-card-actions>
-              <v-btn text class="white--text">See Product</v-btn>
+              <v-btn text class="white--text" to="/admin/products">See Product</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -25,7 +25,7 @@
             <v-card-title class="white--text">Total Contact</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.Contact }}</v-card-subtitle>
             <v-card-actions>
-              <v-btn text class="white--text">See Contact</v-btn>
+              <v-btn text class="white--text" to="/admin/contacts">See Contact</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -34,7 +34,7 @@
             <v-card-title class="white--text">Total Feedback</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.UserFeedback }}</v-card-subtitle>
             <v-card-actions>
-              <v-btn text class="white--text">See Feedback</v-btn>
+              <v-btn text class="white--text" to="/admin/userfeedback/allfeedback">See Feedback</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>

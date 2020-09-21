@@ -93,7 +93,7 @@
 <script>
 export default {
   name: "Single-User",
-  
+
   data() {
     return {
       search: "",
@@ -115,7 +115,6 @@ export default {
       ],
       user: [],
       role: [
-        { id: 1, name: "Super Admin" },
         { id: 2, name: "Admin" },
         { id: 3, name: "User" },
       ],
@@ -138,16 +137,15 @@ export default {
   },
   methods: {
     addRole(item) {
-      const form = new FormData();
-      form.append("id", item.id);
-      form.append("role", this.form.role);
-
       this.$axios
-        .$post("/addRoleToUsers", form)
+        .$post("/addRoleToUsers", {
+          id: item.id,
+          role: this.form.role,
+        })
         .then((res) => {
           this.user = res.data;
 
-          this.$toast.success("Successfully Add Role", {
+          this.$toast.success("Successfully Added Role", {
             duration: 5000,
             action: {
               text: "Cancel",
