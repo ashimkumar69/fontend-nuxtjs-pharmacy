@@ -17,9 +17,10 @@
             <template v-slot:top>
               <v-toolbar flat color="white">
                 <v-toolbar-title>Contacts Trash</v-toolbar-title>
-
+              </v-toolbar>
+              <v-toolbar flat color="white">
                 <v-spacer></v-spacer>
-                <v-col cols="5">
+                <v-col cols="12" sm="10" md="8" lg="6">
                   <v-text-field
                     v-model="search"
                     color="light-blue lighten-2"

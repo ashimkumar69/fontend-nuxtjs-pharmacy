@@ -15,21 +15,6 @@
                 <v-toolbar-title>Blogs</v-toolbar-title>
 
                 <v-spacer></v-spacer>
-                <v-col cols="5">
-                  <v-text-field
-                    v-model="search"
-                    color="light-blue lighten-2"
-                    append-icon="mdi-magnify"
-                    outlined
-                    dense
-                    clear-icon="mdi-close-circle"
-                    clearable
-                    label="Search by Title"
-                    type="text"
-                    class="mr-2"
-                    hide-details
-                  ></v-text-field>
-                </v-col>
 
                 <v-dialog v-model="dialog">
                   <template v-slot:activator="{ on, attrs }">
@@ -147,6 +132,23 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
+              </v-toolbar>
+              <v-toolbar flat color="white">
+                <v-spacer></v-spacer>
+                <v-col cols="12" sm="10" md="8" lg="6">
+                  <v-text-field
+                    v-model="search"
+                    color="light-blue lighten-2"
+                    append-icon="mdi-magnify"
+                    outlined
+                    dense
+                    clear-icon="mdi-close-circle"
+                    clearable
+                    label="Search by Title"
+                    type="text"
+                    hide-details
+                  ></v-text-field>
+                </v-col>
               </v-toolbar>
             </template>
             <template v-slot:item.actions="{ item }">

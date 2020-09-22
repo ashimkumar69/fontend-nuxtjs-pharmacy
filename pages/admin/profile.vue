@@ -2,7 +2,7 @@
   <div>
     <v-container fluid>
       <v-row>
-        <v-col cols="5" class="mx-auto">
+        <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
           <v-card shaped>
             <v-card-text class="d-flex flex-column align-center">
               <v-avatar size="100">

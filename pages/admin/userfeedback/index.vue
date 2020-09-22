@@ -12,13 +12,25 @@
 
                 <v-dialog v-model="dialog" max-width="500px">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      color="light-blue lighten-2"
-                      dark
-                      class="mb-2 text-capitalize"
-                      v-bind="attrs"
-                      v-on="on"
-                    >Give Feedback</v-btn>
+                    <v-sheet color="transparent" class="hidden-sm-and-up">
+                      <v-btn
+                        small
+                        color="light-blue lighten-2"
+                        dark
+                        class="mb-2 text-capitalize"
+                        v-bind="attrs"
+                        v-on="on"
+                      >Give Feedback</v-btn>
+                    </v-sheet>
+                    <v-sheet color="transparent" class="hidden-xs-only">
+                      <v-btn
+                        color="light-blue lighten-2"
+                        dark
+                        class="mb-2 text-capitalize"
+                        v-bind="attrs"
+                        v-on="on"
+                      >Give Feedback</v-btn>
+                    </v-sheet>
                   </template>
                   <v-card>
                     <v-card-title>

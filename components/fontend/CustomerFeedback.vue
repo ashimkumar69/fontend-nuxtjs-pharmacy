@@ -29,7 +29,7 @@
             </v-sheet>
             <v-sheet color="transparent" class="hidden-sm-and-up">
               <v-btn
-                small
+                x-small
                 color="light-blue lighten-2"
                 outlined
                 @click="$refs.medicineCarousel.prev()"
@@ -38,7 +38,7 @@
               </v-btn>
 
               <v-btn
-                small
+                x-small
                 color="light-blue lighten-2"
                 outlined
                 @click="$refs.medicineCarousel.next()"

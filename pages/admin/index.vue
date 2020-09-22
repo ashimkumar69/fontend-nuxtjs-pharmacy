@@ -2,7 +2,7 @@
   <div>
     <v-container fluid>
       <v-row>
-        <v-col cols="3">
+        <v-col cols="12" sm="6" md="3" lg="3">
           <v-card color="light-blue lighten-2">
             <v-card-title class="white--text">Total User</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.User }}</v-card-subtitle>
@@ -11,7 +11,7 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="12" sm="6" md="3" lg="3">
           <v-card color="light-blue lighten-2">
             <v-card-title class="white--text">Total Product</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.Product }}</v-card-subtitle>
@@ -20,7 +20,7 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="12" sm="6" md="3" lg="3">
           <v-card color="light-blue lighten-2">
             <v-card-title class="white--text">Total Contact</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.Contact }}</v-card-subtitle>
@@ -29,7 +29,7 @@
             </v-card-actions>
           </v-card>
         </v-col>
-        <v-col cols="3">
+        <v-col cols="12" sm="6" md="3" lg="3">
           <v-card color="light-blue lighten-2">
             <v-card-title class="white--text">Total Feedback</v-card-title>
             <v-card-subtitle class="white--text">{{ totalDetailsIndex.UserFeedback }}</v-card-subtitle>

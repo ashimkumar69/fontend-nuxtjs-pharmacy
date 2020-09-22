@@ -2,7 +2,7 @@
   <div>
     <v-container fluid>
       <v-row>
-        <v-col cols="5" class="mx-auto">
+        <v-col cols="12" sm="10" md="8" lg="6" class="mx-auto">
           <v-card shaped>
             <v-card-text>
               <v-form ref="form">
@@ -72,8 +72,8 @@ export default {
       form: {
         old_password: null,
         password: null,
-        password_confirmation: null
-      }
+        password_confirmation: null,
+      },
     };
   },
 
@@ -81,7 +81,7 @@ export default {
     submitForm() {
       this.$axios
         .$post("/user/setting", this.form)
-        .then(res => {
+        .then((res) => {
           this.$refs.form.reset();
 
           this.$toast.success("Successfully Change Password", {
@@ -90,15 +90,15 @@ export default {
               text: "Cancel",
               onClick: (e, toastObject) => {
                 toastObject.goAway(0);
-              }
-            }
+              },
+            },
           });
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

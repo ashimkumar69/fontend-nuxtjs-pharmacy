@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container fluid>
-      <v-row>
+      <v-row v-resize="onResize">
         <v-col cols="12">
           <v-data-table :headers="headers" :items="banners" class="elevation-1">
             <template v-slot:top>
@@ -72,7 +72,10 @@
               </v-toolbar>
             </template>
             <template v-slot:item.picture="{ item }">
-              <v-avatar tile size="200">
+              <v-avatar v-if="windowSize.x < 600" tile size="50">
+                <v-img :src="item.picture"></v-img>
+              </v-avatar>
+              <v-avatar v-else tile size="200">
                 <v-img :src="item.picture"></v-img>
               </v-avatar>
             </template>
@@ -128,6 +131,9 @@ export default {
         picture: [],
       },
       itemId: null,
+      windowSize: {
+        x: 0,
+      },
     };
   },
   async fetch({ store, $axios }) {
@@ -145,7 +151,9 @@ export default {
       return this.editedIndex === -1 ? "New Banner" : "Edit Banner";
     },
   },
-
+  mounted() {
+    this.onResize();
+  },
   watch: {
     dialog(val) {
       val || this.close();
@@ -153,6 +161,9 @@ export default {
   },
 
   methods: {
+    onResize() {
+      this.windowSize = { x: window.innerWidth };
+    },
     editItem(item) {
       this.editedIndex = this.banners.indexOf(item);
       this.itemId = item.id;
