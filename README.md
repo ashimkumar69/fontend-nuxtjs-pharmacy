@@ -1,0 +1,1 @@
+# fontend-nuxtjs-pharmacy
