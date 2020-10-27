@@ -18,7 +18,7 @@
 
               <v-col cols="12">
                 <v-card flat class="d-flex justify-center">
-                  <v-card-title>200 TK Delivery Charge, Free Delivery for First Orders!</v-card-title>
+                  <v-card-title>Call Us to Know Delivery Charge, Free Delivery for First Orders!</v-card-title>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="6" lg="4" v-for="item  in orderService" :key="item.name">
@@ -67,43 +67,43 @@ export default {
         { id: 1, icon: "fas fa-question", name: "How To Order" },
         { id: 2, icon: "fas fa-comments", name: "Order By SMS" },
         { id: 3, icon: "fab fa-facebook-f", name: "Order By Facebook" },
-        { id: 4, icon: "fas fa-envelope", name: "Order By Email" }
+        { id: 4, icon: "fas fa-envelope", name: "Order By Email" },
       ],
       orderService: [
         {
           id: 1,
           icon: "fas fa-check",
-          name: "Only <strong>certified</strong> medicine available"
+          name: "Only <strong>certified</strong> medicine available",
         },
         {
           id: 2,
           icon: "far fa-money-bill-alt",
-          name: "Payment: <strong>Cash</strong> on Delivery"
+          name: "Payment: <strong>Cash</strong> on Delivery",
         },
         {
           id: 3,
           icon: "fas fa-map-marker-alt",
-          name: "Delivery anywhere in <strong>Bangladesh</strong>."
+          name: "Delivery anywhere in <strong>Bangladesh</strong>.",
         },
         {
           id: 4,
           icon: "fas fa-clock",
-          name: "Order <strong>Same day</strong> delivery"
+          name: "Order <strong>Same day</strong> delivery",
         },
         {
           id: 5,
           icon: "fas fa-user-md",
-          name: "<strong>Pharmacist</strong> available for consultation"
+          name: "<strong>Pharmacist</strong> available for consultation",
         },
         {
           id: 6,
           icon: "fas fa-lock",
           name:
-            "<strong>Confidential</strong> delivery to ensure <strong>privacy</strong>"
-        }
-      ]
+            "<strong>Confidential</strong> delivery to ensure <strong>privacy</strong>",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 
