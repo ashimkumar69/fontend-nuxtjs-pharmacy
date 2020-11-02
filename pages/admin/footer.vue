@@ -9,20 +9,24 @@
 
               <v-spacer></v-spacer>
               <v-btn
+                v-if="Object.keys(footer).length > 0"
                 color="light-blue lighten-2"
                 dark
                 class="mr-3 text-capitalize"
                 @click="editItem"
-              >Edit</v-btn>
+                >Edit</v-btn
+              >
               <v-dialog v-model="dialog" max-width="700px">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
+                    v-if="Object.keys(footer).length === 0"
                     color="light-blue lighten-2"
                     dark
                     class="text-capitalize"
                     v-bind="attrs"
                     v-on="on"
-                  >Create</v-btn>
+                    >Create</v-btn
+                  >
                 </template>
 
                 <v-card>
@@ -54,12 +58,14 @@
 
                       <span class="black--text">Description</span>
                       <client-only>
-                        <vue-editor v-model="editedItem.description" :editorToolbar="customToolbar"></vue-editor>
+                        <vue-editor
+                          v-model="editedItem.description"
+                          :editorToolbar="customToolbar"
+                        ></vue-editor>
                       </client-only>
-                      <span
-                        v-if="serverErrors.description"
-                        class="red--text"
-                      >{{serverErrors.description[0]}}</span>
+                      <span v-if="serverErrors.description" class="red--text">{{
+                        serverErrors.description[0]
+                      }}</span>
                       <v-text-field
                         class="mt-6"
                         color="light-blue lighten-2"
@@ -121,8 +127,12 @@
                   </v-form>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="light-blue lighten-2" text @click="close">Cancel</v-btn>
-                    <v-btn color="light-blue lighten-2" text @click="save">Save</v-btn>
+                    <v-btn color="light-blue lighten-2" text @click="close"
+                      >Cancel</v-btn
+                    >
+                    <v-btn color="light-blue lighten-2" text @click="save"
+                      >Save</v-btn
+                    >
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -141,15 +151,21 @@
             </v-list>
 
             <v-card-text class="pt-0" v-html="footer.description"></v-card-text>
-            <v-card-title class="d-flex justify-center justify-lg-start">Follow Us</v-card-title>
+            <v-card-title class="d-flex justify-center justify-lg-start"
+              >Follow Us</v-card-title
+            >
             <v-card-text>
               <v-list class="text-center text-lg-left">
                 <v-list-item>
                   <v-list-item-icon class="mr-2">
-                    <v-icon color="light-blue lighten-2">fab fa-facebook-f</v-icon>
+                    <v-icon color="light-blue lighten-2"
+                      >fab fa-facebook-f</v-icon
+                    >
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-subtitle>{{ footer.f_link }}</v-list-item-subtitle>
+                    <v-list-item-subtitle>{{
+                      footer.f_link
+                    }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -157,7 +173,9 @@
                     <v-icon color="light-blue lighten-2">mdi-twitter</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-subtitle>{{ footer.t_link }}</v-list-item-subtitle>
+                    <v-list-item-subtitle>{{
+                      footer.t_link
+                    }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
                 <v-list-item>
@@ -165,7 +183,9 @@
                     <v-icon color="light-blue lighten-2">mdi-youtube</v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-subtitle>{{ footer.y_link }}</v-list-item-subtitle>
+                    <v-list-item-subtitle>{{
+                      footer.y_link
+                    }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
@@ -174,14 +194,18 @@
         </v-col>
         <v-col cols="12" lg="4">
           <v-card>
-            <v-card-title class="d-flex justify-center justify-lg-start">Manually Contact Us</v-card-title>
+            <v-card-title class="d-flex justify-center justify-lg-start"
+              >Manually Contact Us</v-card-title
+            >
             <v-list class="text-center text-lg-left">
               <v-list-item>
                 <v-list-item-icon class="mr-2">
                   <v-icon color="light-blue lighten-2">mdi-phone</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-subtitle>{{ footer.phone }}</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{
+                    footer.phone
+                  }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -189,7 +213,9 @@
                   <v-icon color="light-blue lighten-2">mdi-clock</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-subtitle>Hotline Hours: {{ footer.houre }}</v-list-item-subtitle>
+                  <v-list-item-subtitle
+                    >Hotline Hours: {{ footer.houre }}</v-list-item-subtitle
+                  >
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
@@ -197,15 +223,21 @@
                   <v-icon color="light-blue lighten-2">mdi-email</v-icon>
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-list-item-subtitle>{{ footer.email }}</v-list-item-subtitle>
+                  <v-list-item-subtitle>{{
+                    footer.email
+                  }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
               <v-list-item>
                 <v-list-item-icon class="mr-2">
-                  <v-icon color="light-blue lighten-2">fas fa-map-marker-alt</v-icon>
+                  <v-icon color="light-blue lighten-2"
+                    >fas fa-map-marker-alt</v-icon
+                  >
                 </v-list-item-icon>
                 <v-list-item-content>
-                  <v-card-text class="pt-0 px-0 text--secondary">{{ footer.address }}</v-card-text>
+                  <v-card-text class="pt-0 px-0 text--secondary">{{
+                    footer.address
+                  }}</v-card-text>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -274,6 +306,7 @@ export default {
   async fetch({ store, $axios }) {
     try {
       const footer = await $axios.$get("/footer");
+
       store.dispatch("footer/setFooter", footer.data);
     } catch (error) {
       console.log(error);
